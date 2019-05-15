@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="./_template.xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+	<ui:define name="top">
+        cadastro de lista de compras
+    </ui:define>
+
+	<ui:define name="content">
+		<h:form>
+
+			<h:panelGrid columns="3" styleClass="tabela" border="1">
+				<h:panelGrid columns="2">
+					<h:outputLabel value="lista:" for="nomeCompras" />
+					<h:outputLabel
+						value="#{listaBean.compras.idListaCompras}-#{listaBean.compras.nomeListaCompras}" />
+
+				</h:panelGrid>
+				<h:panelGrid columns="2">
+
+					<h:outputLabel value="data:" for="dataCompras" />
+					<h:outputLabel value="#{listaBean.compras.dataListaCompras}" />
+				</h:panelGrid>
+				<h:panelGrid columns="2">
+
+					<h:outputLabel value="qtde:" for="qtdeProdutos" />
+					<h:outputLabel value="#{listaBean.compras.qtdProduto}" />
+				</h:panelGrid>
+			</h:panelGrid>
+
+
+			<h:panelGrid columns="3">
+				<h:outputLabel value="nome produto:" for="produto" />
+				<h:inputText value="#{listaBean.produto.nome}"
+					id="produto" label="produto" required="true" />
+				<h:message for="produto" styleClass="erro" />
+
+				<h:outputLabel value="marca:" for="marca" />
+				<h:inputText value="#{listaBean.produto.marca}"
+					id="marca" label="marca" required="true" />
+				<h:message for="marca" styleClass="erro" />
+
+				<h:outputLabel value="descrição do produto:" for="descricao" />
+				<h:inputText value="#{listaBean.produto.descricao}"
+					id="descricao" label="descricao" required="true" />
+				<h:message for="descricao" styleClass="erro" />
+
+
+				<h:outputLabel value="preço:" for="preço" />
+				<h:inputText value="#{listaBean.produto.valorProduto}"
+					id="preço" label="preço" />
+				<h:message for="preço" styleClass="erro" />
+
+				<h:outputLabel value="tamanho:" for="tamanho" />
+				<h:inputText value="#{listaBean.produto.quantidade}"
+					id="tamanho" label="tamanho" />
+				<h:message for="dataCompras" styleClass="erro" />
+
+				<h:outputLabel value="mercado:" for="mercado" />
+				<h:inputText value="#{listaBean.produto.mercado}"
+					id="mercado" label="mercado" required="true" />
+				<h:message for="mercado" styleClass="erro" />
+			</h:panelGrid>
+
+			<h:commandButton value="add produto na lista"
+				action="#{listaBean.addProduto()}" />
+
+
+
+			<h:dataTable rendered="#{not empty listaBean.compras.listaProdutos}"
+				value="#{listaBean.compras.listaProdutos}" var="lp"
+				styleClass="tabela" captionClass="tabelaCaption"
+				headerClass="tabelaHeader" rowClasses="linhaPar, linhaImpar">
+				<f:facet name="caption">lista de produtos</f:facet>
+				<h:column>
+					<f:facet name="header">nome</f:facet>
+					<h:outputText value="#{lp.id}-#{lp.nome}"
+						action="#{listaBean.pag_detalhe_lista(lc)}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">marca</f:facet>
+					<h:outputText value="#{lp.marca}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">quantidade</f:facet>
+					<h:outputText value="#{lp.quantidade} #{lp.unidadeMedida}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">descrição</f:facet>
+					<h:outputText value="#{lp.descricao}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">valor</f:facet>
+					<h:outputText value="#{lp.valorProduto}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">data</f:facet>
+					<h:outputText value="#{lp.dataProduto}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">mercado</f:facet>
+					<h:outputText value="#{lp.mercado}" />
+				</h:column>
+			</h:dataTable>
+
+
+
+		</h:form>
+		<h:form>
+
+			<h:commandButton value="ir para a home"
+				action="#{listaBean.pag_home()}" />
+		</h:form>
+	</ui:define>
+
+</ui:composition>
+

@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="./_template.xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+	<ui:define name="top">
+        cadastro de lista de compras
+    </ui:define>
+
+	<ui:define name="content">
+		<h:form id="form">
+			<h:panelGrid columns="3">
+
+				<h:outputLabel value="nome da lista de compras:" for="nomeCompras" />
+				<h:inputText value="#{listaBean.compras.nomeListaCompras}"
+					id="nomeCompras" label="nome-Compras" required="true" />
+				<h:message for="nomeCompras" styleClass="erro" />
+
+			</h:panelGrid>
+			<h:commandButton value="criar lista"
+				action="#{listaBean.addLista()}" />
+
+		</h:form>
+
+		<h:form id="formProduto" style="display:none;" >
+			<h:panelGrid columns="3" id="idPanelGridProduto" >
+
+				<h:outputLabel value="nome produto:" for="nomeProduto" />
+				<h:inputText value="#{listaBean.produto.nome}" id="nomeProduto"
+					label="nome-Produto" required="true" />
+				<h:message for="nomeProduto" styleClass="erro" />
+
+				<h:outputLabel value="marca do produto:" for="marcaProduto" />
+				<h:inputText value="#{listaBean.produto.marca}" id="marcaProduto"
+					label="marca-Produto" required="true" />
+				<h:message for="marcaProduto" styleClass="erro" />
+
+				<h:outputLabel value="quantidade:" for="quantidadeProduto" />
+				<h:inputText value="#{listaBean.produto.quantidade}"
+					id="quantidadeProduto" label="quantidade-Produto" required="true" />
+				<h:message for="quantidadeProduto" styleClass="erro" />
+
+				<h:outputLabel value="descrição:" for="descricaoProduto" />
+				<h:inputText value="#{listaBean.produto.descricao}"
+					id="descricaoProduto" label="descricao-Produto" required="true" />
+				<h:message for="descricaoProduto" styleClass="erro" />
+
+				<h:outputLabel value="preço do produto:" for="valorProduto" />
+				<h:inputText value="#{listaBean.produto.valorProduto}"
+					id="valorProduto" label="valor-Produto" required="true" />
+				<h:message for="valorProduto" styleClass="erro" />
+
+
+				<h:outputLabel value="data:" for="dataProduto" />
+				<h:inputText value="#{listaBean.produto.dataProduto}"
+					id="dataProduto" label="data-Produto" required="true" />
+				<h:message for="dataProduto" styleClass="erro" />
+
+				<h:outputLabel value="mercado:" for="mercadoProduto" />
+				<h:inputText value="#{listaBean.produto.mercado.nome}"
+					id="mercadoProduto" label="mercado-Produto" required="true" />
+				<h:message for="mercadoProduto" styleClass="erro" />
+			</h:panelGrid>
+
+			<h:commandButton value="adicionar produto"
+				action="#{produtoBean.addProduto()}" />
+		</h:form>
+
+		<h:dataTable value="#{listaBean.compras.listaProdutos}" var="p"
+			styleClass="tabela" captionClass="tabelaCaption"
+			headerClass="tabelaHeader" rowClasses="linhaPar, linhaImpar" style="display:none;">
+			<f:facet name="caption">produtos adicionados</f:facet>
+			<h:column>
+				<f:facet name="header">Id</f:facet>
+				<h:outputText value="#{p.id}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">nome</f:facet>
+				<h:outputText value="#{p.nome}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">marca</f:facet>
+				<h:outputText value="#{p.marca}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">quantidade</f:facet>
+				<h:outputText value="#{p.quantidade} #{p.unidadeMedida}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">descrição</f:facet>
+				<h:outputText value="#{p.descricao}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">valor</f:facet>
+				<h:outputText value="#{p.valorProduto}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">data</f:facet>
+				<h:outputText value="#{p.dataProduto}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">mercado</f:facet>
+				<h:outputText value="#{p.mercado.nome}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">excluir</f:facet>
+				<h:commandLink value="excluir"
+					action="#{listaBean.pag_excluir_lista(p)}" />
+			</h:column>
+		</h:dataTable>
+
+	</ui:define>
+
+</ui:composition>

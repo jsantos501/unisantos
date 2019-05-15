@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./_template.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+    <ui:define name="top">
+        Home - consulta de lista de produtos
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form id="form">
+                   <h:message for="success" styleClass="success" showDetail="true" showSummary="true"/>
+                   <h:message for="error" styleClass="erro" showDetail="true" showSummary="true"/>
+ 
+
+            <h:dataTable value="#{userBean.listasCompras}" var="lc"          
+                         styleClass="tabela" captionClass="tabelaCaption" 
+                         headerClass="tabelaHeader" 
+                         rowClasses="linhaPar, linhaImpar">
+                <f:facet name="caption">lista de compras</f:facet>
+                <h:column>
+                    <f:facet name="header">Nome</f:facet>
+                <h:commandLink value="#{lc.idListaCompras} - #{lc.nomeListaCompras}" action="#{listaBean.pag_detalhe_lista(lc)}"/>
+                
+                </h:column>
+                <h:column>
+                    <f:facet name="header">qtd de produtos</f:facet>
+                    <h:outputText value="#{lc.qtdProduto}"/>
+                </h:column>
+              	<h:column>
+                    <f:facet name="header">user</f:facet>
+                    <h:outputText value="#{lc.idUser}"/>
+                </h:column>
+              	<h:column>
+                    <f:facet name="header">alterar</f:facet>
+                <h:commandLink value="alterar" action="#{listaBean.pag_alterar_1(lc)}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">excluir</f:facet>
+                <h:commandLink value="excluir" action="#{listaBean.pag_excluir_1(lc)}"/>
+                </h:column>
+              </h:dataTable>
+        <h:commandButton value="Nova Lista de Compras" action="#{listaBean.pag_cadastro_lista}"/>
+ 
+        </h:form>
+        
+    </ui:define>
+
+</ui:composition>

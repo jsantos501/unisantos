@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./_template.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+
+    <ui:define name="top">
+        Home - consulta de lista de produtos
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form>
+           <h:panelGrid columns="3">
+                <h:outputLabel value="id:" />
+                <h:outputLabel value="#{listaBean.compras.idListaCompras}" id="idCompras" />
+                <h:message for="idCompras" styleClass="erro" />
+                
+                <h:outputLabel value="nome da lista de compras:" for="nomeCompras"/>
+                <h:inputText value="#{listaBean.compras.nomeListaCompras}" id="nomeCompras" label="nome-Compras" required="true"/>
+                <h:message for="nomeCompras" styleClass="erro" />
+                
+                <h:outputLabel value="data da lista de compras:" for="dataCompras" />
+                <h:inputText value="#{listaBean.compras.dataListaCompras}" id="dataCompras" label="data-Compras"/>
+                <h:message for="dataCompras" styleClass="erro" />
+
+                <h:outputLabel value="quantidade de produtos:" for="qtdeProdutos"/>
+                <h:outputLabel value="#{listaBean.compras.qtdProduto}" id="qtdeProdutos" />
+                <h:message for="qtdeProdutos" styleClass="erro" />
+            </h:panelGrid>
+
+			<h:commandButton value="alterar cabeçalho da lista" action="#{listaBean.alterarCompra()}"/>
+
+            <h:dataTable value="#{listaBean.compras.listaProdutos}" var="lp"          
+                         styleClass="tabela" captionClass="tabelaCaption" 
+                         headerClass="tabelaHeader" 
+                         rowClasses="linhaPar, linhaImpar">
+                <f:facet name="caption">lista de produtos</f:facet>
+                <h:column>
+                    <f:facet name="header">Id</f:facet>
+                    <h:outputLabel value="#{lp.id}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">nome</f:facet>
+                    <h:inputText value="#{lp.nome}" id="nome"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">marca</f:facet>
+                    <h:inputText value="#{lp.marca}" id="marca"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">quantidade</f:facet>
+                    <h:inputText value="#{lp.quantidade}" id="quantidade"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">descrição</f:facet>
+                    <h:inputText value="#{lp.descricao}" id="descricao"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">valor</f:facet>
+                    <h:inputText value="#{lp.valorProduto}" id="valor"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">data</f:facet>
+                    <h:inputText value="#{lp.dataProduto}" id="data"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">mercado</f:facet>
+                    <h:inputText value="#{lp.mercado}" id="mercado"/>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header"> </f:facet>
+                	<h:commandButton value="alterar" action="#{listaBean.alterarProduto(lp)}"/>
+                </h:column>
+                
+            </h:dataTable>
+
+
+       </h:form>
+    </ui:define>
+
+</ui:composition>
