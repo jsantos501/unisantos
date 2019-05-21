@@ -29,6 +29,49 @@
 				</h:panelGrid>
 			</h:panelGrid>
 
+		
+			<h:outputLabel value="adicionar novo produto"/>
+			
+			<h:panelGrid columns="3">
+				<h:outputLabel value="nome:" for="produto" />
+				<h:inputText value="#{listaBean.produto.nome}"
+					id="produto" label="produto" required="true" requiredMessage="nome do produto é obrigatório" />
+				<h:message for="produto" styleClass="erro" />
+
+				<h:outputLabel value="marca:" for="marca" />
+				<h:inputText value="#{listaBean.produto.marca}"
+					id="marca" label="marca" required="true" />
+				<h:message for="marca" styleClass="erro" />
+
+				<h:outputLabel value="descrição:" for="descricao" />
+				<h:inputText value="#{listaBean.produto.descricao}"
+					id="descricao" label="descricao" required="true" />
+				<h:message for="descricao" styleClass="erro" />
+
+
+				<h:outputLabel value="preço:" for="valorProduto" />
+				<h:inputText value="#{listaBean.produto.valorProduto}"
+					id="valorProduto" label="preço do produto" required="true"/>
+				<h:message for="valorProduto" styleClass="erro" />
+
+				<h:outputLabel value="tamanho:" for="quantidade" />
+				<h:inputText value="#{listaBean.produto.quantidade}"
+					id="quantidade" label="tamanho" required="true"/>
+				<h:message for="quantidade" styleClass="erro" />
+
+				<h:outputLabel value="mercado:" for="mercado" />
+				<h:inputText value="#{listaBean.produto.mercado}"
+					id="mercado" label="mercado" required="true" />
+				<h:message for="mercado" styleClass="erro" />
+			</h:panelGrid>
+
+			<h:commandButton value="add produto na lista"
+				action="#{listaBean.addProdutoEmDetalhe()}" />
+
+       </h:form>
+        <h:form>
+
+
             <h:dataTable value="#{listaBean.compras.listaProdutos}" var="lp"          
                          styleClass="tabela" captionClass="tabelaCaption" 
                          headerClass="tabelaHeader" 
@@ -40,7 +83,7 @@
                 </h:column>
                 <h:column>
                     <f:facet name="header">nome</f:facet>
-                    <h:commandLink value="#{lp.id}-#{lp.nome}" action="#{listaBean.pag_detalhe_lista(lc)}"/>
+                    <h:outputText value="#{lp.id}-#{lp.nome}"/>
                 </h:column>
                 <h:column>
                     <f:facet name="header">marca</f:facet>
@@ -67,38 +110,13 @@
                     <h:outputText value="#{lp.mercado}"/>
                 </h:column>
                 <h:column>
-                	<h:commandButton value="excluir" action="#{listaBean.excluirProduto(lp)}"/>
+                	<h:commandButton value="excluir" action="#{listaBean.excluirProdutoEmDetalhe(lp)}"/>
                	</h:column>
                
                 <f:facet name="footer">
-	                <h:column>
-	               		<h:selectBooleanCheckbox value="false" disabled="true" />
-	                </h:column>
-	                <h:column>
-		            	<h:inputText value="#{listaBean.produto.nome}" id="produto" label="produto" required="true" />
-				    </h:column>
-	                <h:column>
-	                   <h:inputText value="#{listaBean.produto.marca}" id="marca" label="marca" required="true" />
-	                </h:column>
-	                <h:column>
-	                   <h:inputText value="#{listaBean.produto.quantidade}" id="tamanho" label="tamanho" />
-	                </h:column>
-	                <h:column>
-	                    <h:inputText value="#{listaBean.produto.descricao}" id="descricao" label="descricao" required="true" />
-	                </h:column>
-	                <h:column>
-	                    <h:inputText value="#{listaBean.produto.valorProduto}" id="preço" label="preço" />
-	                </h:column>
-	                <h:column>
-	                    data vazia
-	                </h:column>
-	                <h:column>
-	                    <h:inputText value="#{listaBean.produto.mercado}" id="mercado" label="mercado" required="true" />
-	                </h:column>
-	                <h:column>
-                		<h:commandButton value="add produto" action="#{listaBean.addProduto()}" />
-                	</h:column>
-                    
+	            	<h:column>
+	            		<h:outputText value="valor total: R$ 0,00"/>
+               		</h:column>
        			</f:facet>
             </h:dataTable>
 

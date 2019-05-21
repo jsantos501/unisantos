@@ -203,6 +203,53 @@ public class MockDados {
 		}	
 		return null;
 	}
+	
+	
+	
+	public static List<Usuario> getListaUsuarios(){
+		List<Usuario> listaUsers = new ArrayList<Usuario>();
+		listaUsers.add(getUsuario());
+		
+		return listaUsers;
+	}
 
+	
+	public static List<Usuario> addUsuarioNaLista(List<Usuario> lista, Usuario user){
+
+		Random gerador = new Random();
+		user.setId(""+ gerador.nextInt(99));
+		lista.add(user);
+		
+		return lista;
+	}
+	
+	public static List<Usuario> removeProdutoNaLista(List<Usuario> lista, Usuario exUser){
+		for(Usuario u:lista) {
+			if(u.getId().equals(exUser.getId())) {
+				lista.remove(u);
+				return lista;
+			}
+		}
+		return null;
+	}
+	
+	public static List<Usuario> attUsuarioNaLista(List<Usuario> lista, Usuario user){
+		for(Usuario u:lista) {
+			if(u.getId().equals(user.getId())) {
+				u.setCelular(user.getCelular());
+				u.setCep(user.getCep());
+				u.setCpf(user.getCpf());
+				u.setEmail(user.getEmail());
+				u.setLogin(user.getLogin());
+				u.setNome(user.getNome());
+				u.setPerfil(user.getPerfil());
+				u.setSenha(user.getSenha());
+				
+				return lista;
+			}
+		}	
+		return null;
+	}
+	
 }
 

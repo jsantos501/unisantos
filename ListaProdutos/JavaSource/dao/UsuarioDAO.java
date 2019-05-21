@@ -7,11 +7,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.enterprise.context.Dependent;
+
 import mock.MockDados;
 import model.Contato;
 import model.ListaCompras;
 import model.Produto;
 import model.Usuario;
+
 
 public class UsuarioDAO {
 
@@ -43,31 +46,32 @@ public class UsuarioDAO {
         }
     }
 
-    public List<Produto> listar() throws SQLException {
-        List<Produto> listaProduto = new ArrayList<>();
-        try {
-            connection = ConnectionFactory.getConnection();
-            try {
-                PreparedStatement stmt = connection.
-                        prepareStatement(SQL_LISTAR_USUARIO);
-                ResultSet rs = stmt.executeQuery();
-                while (rs.next()) {
-                	Produto c = new Produto();
+    public List<Usuario> listar() throws SQLException {
+        List<Usuario> listaUsuario = new ArrayList<>();
+        listaUsuario = MockDados.getListaUsuarios();
+//        try {
+//            connection = ConnectionFactory.getConnection();
+//            try {
+//                PreparedStatement stmt = connection.
+//                        prepareStatement(SQL_LISTAR_USUARIO);
+//                ResultSet rs = stmt.executeQuery();
+//                while (rs.next()) {
+//                	Produto c = new Produto();
 //                    c.setId(rs.getLong("id"));
 //                    c.setNome(rs.getString("nome"));
 //                    c.setEmail(rs.getString("email"));
 //                    c.setEndereco(rs.getString("endereco"));
-                    listaProduto.add(c);
-                }
-                stmt.close();
-                rs.close();
-            } finally {
-                connection.close();
-            }
-        } catch (SQLException e) {
-            throw e;
-        }
-        return listaProduto;
+//                	listaUsuario.add(c);
+//                }
+//                stmt.close();
+//                rs.close();
+//            } finally {
+//                connection.close();
+//            }
+//        } catch (SQLException e) {
+//            throw e;
+//        }
+        return listaUsuario;
     }
     
     public Usuario consultar(String usuario, String senha) throws SQLException {
@@ -138,6 +142,57 @@ public class UsuarioDAO {
         }
     }
     
+    public List<Usuario> addUsuario(List<Usuario> lista, Usuario usuario) throws SQLException {
+//        try {
+//            connection = ConnectionFactory.getConnection();
+//            try {
+//                PreparedStatement stmt = connection.prepareStatement(SQL_INSERIR_LISTA_COMPRAS);
+    			return MockDados.addUsuarioNaLista(lista, usuario);
+//                stmt.setString(1, compras.getNomeListaCompras());
+//                stmt.execute();
+//                stmt.close();
+//            } finally {
+//                connection.close();
+//            }
+//        } catch (SQLException ex) {
+//            throw ex;
+//        }
+    }
 
 	
+    public List<Usuario> excluirUsuario(List<Usuario> lista, Usuario usuario) throws SQLException {
+//        try {
+//            connection = ConnectionFactory.getConnection();
+//            try {
+//                PreparedStatement stmt = connection.prepareStatement(SQL_ALTERAR_PRODUTO);
+    			return MockDados.removeProdutoNaLista(lista, usuario);
+//                stmt.setString(1, compras.getNomeListaCompras());
+//                stmt.execute();
+//                stmt.close();
+//            } finally {
+//                connection.close();
+//            }
+//        } catch (SQLException ex) {
+//            throw ex;
+//        }
+    }
+    
+    
+    public List<Usuario> alterarUsuario(List<Usuario> lista, Usuario usuario) throws SQLException {
+//        try {
+//            connection = ConnectionFactory.getConnection();
+//            try {
+//                PreparedStatement stmt = connection.prepareStatement(SQL_ALTERAR_PRODUTO);
+    			return MockDados.attUsuarioNaLista(lista, usuario);
+//                stmt.setString(1, compras.getNomeListaCompras());
+//                stmt.execute();
+//                stmt.close();
+//            } finally {
+//                connection.close();
+//            }
+//        } catch (SQLException ex) {
+//            throw ex;
+//        }
+    }
+    
 }

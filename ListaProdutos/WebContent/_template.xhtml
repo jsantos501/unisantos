@@ -14,6 +14,9 @@
     <h:body>
         <div id="top" class="top">
             <h2><ui:insert name="top">LISTA DE PRODUTOS</ui:insert></h2>
+            <h:message for="success" styleClass="success" showDetail="true" showSummary="true"/>
+            <h:message for="error" styleClass="erro" showDetail="true" showSummary="true"/>
+        
         </div>
         <div>
             <div id="left">
@@ -22,10 +25,8 @@
                         <h:panelGrid>
                             <h:commandLink value="home" action="#{listaBean.pag_home}" />
                             <h:commandLink value="criar lista" action="#{listaBean.pag_cadastro_lista}" />
-                            <h:commandLink value="comparar lista" action="#{contatoBean.pag_novo}" />
-                            <h:commandLink value="manutenção de produtos" action="#{contatoBean.pag_novo}" />
-                            <h:commandLink value="manutenção de mercados" action="#{contatoBean.pag_novo}" />
-                            <h:commandLink value="manutenção de usuario" action="#{contatoBean.pag_novo}" />
+                            <h:commandLink value="usuarios" action="#{userBean.listarUsuario}" />
+                            <h:commandLink value="sair" action="#{userBean.sairSistema}" />
                         </h:panelGrid>
                     </h:form>
                 </ui:insert>

@@ -34,6 +34,8 @@ public class ListaBean  implements Serializable {
 	
     public String pag_detalhe_lista(ListaCompras listaCompras) {
     	setCompras(listaCompras);
+    	setProduto(new Produto());
+    	
     	SessionContext.getInstance().setAttribute(Constantes.KEY_SESSION_COMPRAS_SELECIONADA, listaCompras);
     	return "/lista_compras";
     }

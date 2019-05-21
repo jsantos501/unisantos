@@ -11,7 +11,7 @@
             <supported-locale>en</supported-locale>
         </locale-config>
         <resource-bundle>
-            <base-name>messages.messages</base-name>
+            <base-name>message.messages</base-name>
             <var>msgs</var>
         </resource-bundle>
     </application>

@@ -1,35 +1,47 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 
 <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                template="./_template.xhtml"
-                xmlns:h="http://xmlns.jcp.org/jsf/html"
-                xmlns:f="http://xmlns.jcp.org/jsf/core"
-                xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+	template="./_template.xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
 
-        <ui:define name="left">
-        <div class="altura_maxima">teste
-        </div>
-        </ui:define>
-     <ui:define name="content">
-        <h:form id="form">
-           <h:outputText value="#{session.getAttribute('message')}" styleClass="erro" 
-              rendered="#{not empty session.getAttribute('message')}"/>
-         
-            <h:panelGrid columns="3">
-                <h:outputLabel value="Login: " for="login"/>
-                <h:inputText id="login" 
-                             value="#{userBean.user.login}" required="true"
-                             requiredMessage="Erro: informe o login"/>
-                <h:message for="login" styleClass="erro"/>
-                <h:outputLabel value="Senha: " for="password"/>
-                <h:inputSecret id="password" redisplay="false" value="#{userBean.user.senha}" required="true"   
-                               requiredMessage="Erro: informe a senha"/>
-                <h:message for="password" styleClass="erro"/>
-            </h:panelGrid>
-            <h:commandButton value="Entrar" action="#{userBean.validar}" id="submit"/>
-            <h:message for="submit" styleClass="erro" showDetail="true" showSummary="true"/>
-            
-          
-        </h:form>
-        </ui:define>
+	<ui:define name="left">
+		<div class="altura_maxima"></div>
+	</ui:define>
+	<ui:define name="content">
+		<f:loadBundle basename="message.messages" var="msgs" />
+		<f:view locale="#{localeMB.currentLocale}"
+			contentType="text/html; charset=UTF-8" encoding="UTF-8">
+			<h:form>
+				<p:commandButton value="pt_BR" action="#{userBean.portugueseLocale}"
+					ajax="false" style="font-size: 20px;" />
+				<p:commandButton value="en_US" action="#{userBean.englishLocale}"
+					ajax="false" style="font-size: 20px;" />
+			</h:form>
+
+			<h:form id="form">
+
+				<h:outputText value="#{session.getAttribute('message')}"
+					styleClass="erro"
+					rendered="#{not empty session.getAttribute('message')}" />
+
+				<h:panelGrid columns="3">
+					<h:outputLabel value="#{msgs.login}:" for="login" />
+					<h:inputText id="login" value="#{userBean.user.login}"
+						required="true" requiredMessage="#{msgs.login.erro}" />
+					<h:message for="login" styleClass="erro" />
+
+					<h:outputLabel value="#{msgs.senha}: " for="password" />
+					<h:inputSecret id="password" redisplay="false"
+						value="#{userBean.user.senha}" required="true"
+						requiredMessage="#{msgs.senha.erro}" />
+					<h:message for="password" styleClass="erro" />
+				</h:panelGrid>
+				<h:commandButton value="#{msgs.entrar}" action="#{userBean.validar}"
+					id="submit" />
+				<h:message for="submit" styleClass="erro" showDetail="true"
+					showSummary="true" />
+
+			</h:form>
+	</ui:define>
 </ui:composition>
