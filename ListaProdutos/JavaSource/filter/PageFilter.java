@@ -8,13 +8,12 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import constantes.Constantes;
 import model.Usuario;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 public class PageFilter implements Filter {
 
@@ -34,7 +33,7 @@ public class PageFilter implements Filter {
 		} else if(user != null && user.getLogin() != null) {
 			chain.doFilter(request, response);
 		} else {
-			sessao.setAttribute("message", "É obrigatório realizar o login.");
+			sessao.setAttribute(Constantes.MESSAGE, Constantes.OBRIGATORIO_LOGIN_PAGE_SESSION);
 			String contextPath = ((HttpServletRequest) request).getContextPath();
 			((HttpServletResponse) response).sendRedirect(contextPath + Constantes.PAGINA_REDIRECIONAMENTO_LOGIN);
 		}

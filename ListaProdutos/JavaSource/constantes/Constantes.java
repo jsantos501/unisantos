@@ -10,5 +10,9 @@ public class Constantes {
 	public final static String MESSAGE_FORM_SUCCESS = "form:success";
 	public final static String PAGINA_LOGIN_APLICACAO = "/ListaProdutos/faces/login.xhtml";
 	public final static String PAGINA_REDIRECIONAMENTO_LOGIN = "/faces/login.xhtml";
+	public final static String MESSAGE_MESSAGES = "message.messages";
+	public final static String MESSAGE = "message";
+	public final static String OBRIGATORIO_LOGIN_PAGE = "obrigatorio_login_page";
+	public final static String OBRIGATORIO_LOGIN_PAGE_SESSION = "É obrigatório realizar o registro.";
 
 }

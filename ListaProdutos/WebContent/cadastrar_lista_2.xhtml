@@ -5,67 +5,80 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
 
-	<ui:define name="top">
-        cadastro de lista de compras
-    </ui:define>
-
 	<ui:define name="content">
 		<h:form>
 
 			<h:panelGrid columns="3" styleClass="tabela" border="1">
 				<h:panelGrid columns="2">
-					<h:outputLabel value="lista:" for="nomeCompras" />
+					<h:outputLabel value="#{msgs.lista_ponto}" for="nomeCompras" />
 					<h:outputLabel
 						value="#{listaBean.compras.idListaCompras}-#{listaBean.compras.nomeListaCompras}" />
 
 				</h:panelGrid>
 				<h:panelGrid columns="2">
 
-					<h:outputLabel value="data:" for="dataCompras" />
+					<h:outputLabel value="#{msgs.data_ponto}" for="dataCompras" />
 					<h:outputLabel value="#{listaBean.compras.dataListaCompras}" />
 				</h:panelGrid>
 				<h:panelGrid columns="2">
 
-					<h:outputLabel value="qtde:" for="qtdeProdutos" />
+					<h:outputLabel value="#{msgs.qtde_ponto}" for="qtdeProdutos" />
 					<h:outputLabel value="#{listaBean.compras.qtdProduto}" />
 				</h:panelGrid>
 			</h:panelGrid>
 
 
 			<h:panelGrid columns="3">
-				<h:outputLabel value="nome produto:" for="produto" />
-				<h:inputText value="#{listaBean.produto.nome}"
-					id="produto" label="produto" required="true" />
+				<h:outputLabel value="#{msgs.nome_produto_ponto}" for="produto" />
+				<h:inputText value="#{listaBean.produto.nome}" id="produto"
+					label="produto" required="true" 
+					requiredMessage="#{msgs.nome_erro}" validatorMessage="#{msgs.validator_cadastro_nome_produto_ponto}" >
+						<f:validateLength minimum="1" maximum="20"/>
+					</h:inputText>
 				<h:message for="produto" styleClass="erro" />
 
-				<h:outputLabel value="marca:" for="marca" />
-				<h:inputText value="#{listaBean.produto.marca}"
-					id="marca" label="marca" required="true" />
+				<h:outputLabel value="#{msgs.marca_ponto}" for="marca" />
+				<h:inputText value="#{listaBean.produto.marca}" id="marca"
+					label="marca" required="true" 
+					requiredMessage="#{msgs.marca_erro}" validatorMessage="#{msgs.validator_cadastro_marca_ponto}" >
+						<f:validateLength minimum="1" maximum="20"/>
+					</h:inputText>
 				<h:message for="marca" styleClass="erro" />
 
-				<h:outputLabel value="descrição do produto:" for="descricao" />
-				<h:inputText value="#{listaBean.produto.descricao}"
-					id="descricao" label="descricao" required="true" />
+				<h:outputLabel value="#{msgs.descricao_produto_ponto}" for="descricao" />
+				<h:inputText value="#{listaBean.produto.descricao}" id="descricao"
+					label="descricao" required="true" 
+					requiredMessage="#{msgs.descricao_produto_erro}" validatorMessage="#{msgs.validator_cadastro_descricao_produto_ponto}" >
+						<f:validateLength minimum="1" maximum="20"/>
+					</h:inputText>
 				<h:message for="descricao" styleClass="erro" />
 
+				<h:outputLabel value="#{msgs.preco_ponto}" for="preco" />
+				<h:inputText value="#{listaBean.produto.valorProduto}" id="preco"
+					label="preco" required="true"
+					requiredMessage="#{msgs.valor_erro}" converterMessage="#{msgs.convert_cadastro_valor_erro}" >
+					<f:convertNumber type="currency" minIntegerDigits="1" maxFractionDigits="2" maxIntegerDigits="4" />
+					</h:inputText>
+				<h:message for="preco" styleClass="erro" />
 
-				<h:outputLabel value="preço:" for="preço" />
-				<h:inputText value="#{listaBean.produto.valorProduto}"
-					id="preço" label="preço" />
-				<h:message for="preço" styleClass="erro" />
+				<h:outputLabel value="#{msgs.tamanho_ponto}" for="tamanho" />
+				<h:inputText value="#{listaBean.produto.quantidade}" id="tamanho"
+					label="tamanho" required="true"
+					requiredMessage="#{msgs.quantidade_erro}" converterMessage="#{msgs.convert_cadastro_tamanho_ponto}" >
+					<f:convertNumber type="number" integerOnly="true" minIntegerDigits="1" maxIntegerDigits="2"/>
+					</h:inputText>
+				<h:message for="tamanho" styleClass="erro" />
 
-				<h:outputLabel value="tamanho:" for="tamanho" />
-				<h:inputText value="#{listaBean.produto.quantidade}"
-					id="tamanho" label="tamanho" />
-				<h:message for="dataCompras" styleClass="erro" />
-
-				<h:outputLabel value="mercado:" for="mercado" />
-				<h:inputText value="#{listaBean.produto.mercado}"
-					id="mercado" label="mercado" required="true" />
+				<h:outputLabel value="#{msgs.mercado_ponto}" for="mercado" />
+				<h:inputText value="#{listaBean.produto.mercado}" id="mercado"
+					label="mercado" required="true" 
+					requiredMessage="#{msgs.mercado_erro}" validatorMessage="#{msgs.validator_cadastro_mercado_ponto}" >
+					<f:validateLength minimum="1" maximum="20"/>
+					</h:inputText>
 				<h:message for="mercado" styleClass="erro" />
 			</h:panelGrid>
 
-			<h:commandButton value="add produto na lista"
+			<h:commandButton value="#{msgs.add_produto_lista}"
 				action="#{listaBean.addProduto()}" />
 
 
@@ -74,34 +87,34 @@
 				value="#{listaBean.compras.listaProdutos}" var="lp"
 				styleClass="tabela" captionClass="tabelaCaption"
 				headerClass="tabelaHeader" rowClasses="linhaPar, linhaImpar">
-				<f:facet name="caption">lista de produtos</f:facet>
+				<f:facet name="caption">#{msgs.lista_lista_produtos}</f:facet>
 				<h:column>
-					<f:facet name="header">nome</f:facet>
+					<f:facet name="header">#{msgs.lista_nome}</f:facet>
 					<h:outputText value="#{lp.id}-#{lp.nome}"
 						action="#{listaBean.pag_detalhe_lista(lc)}" />
 				</h:column>
 				<h:column>
-					<f:facet name="header">marca</f:facet>
+					<f:facet name="header">#{msgs.lista_marca}</f:facet>
 					<h:outputText value="#{lp.marca}" />
 				</h:column>
 				<h:column>
-					<f:facet name="header">quantidade</f:facet>
-					<h:outputText value="#{lp.quantidade} #{lp.unidadeMedida}" />
+					<f:facet name="header">#{msgs.lista_quantidade}</f:facet>
+					<h:outputText value="#{lp.quantidade}" />
 				</h:column>
 				<h:column>
-					<f:facet name="header">descrição</f:facet>
+					<f:facet name="header">#{msgs.lista_descricao}</f:facet>
 					<h:outputText value="#{lp.descricao}" />
 				</h:column>
 				<h:column>
-					<f:facet name="header">valor</f:facet>
+					<f:facet name="header">#{msgs.lista_valor}</f:facet>
 					<h:outputText value="#{lp.valorProduto}" />
 				</h:column>
 				<h:column>
-					<f:facet name="header">data</f:facet>
+					<f:facet name="header">#{msgs.lista_data}</f:facet>
 					<h:outputText value="#{lp.dataProduto}" />
 				</h:column>
 				<h:column>
-					<f:facet name="header">mercado</f:facet>
+					<f:facet name="header">#{msgs.lista_mercado}</f:facet>
 					<h:outputText value="#{lp.mercado}" />
 				</h:column>
 			</h:dataTable>
@@ -111,7 +124,7 @@
 		</h:form>
 		<h:form>
 
-			<h:commandButton value="ir para a home"
+			<h:commandButton value="#{msgs.ir_para_home}"
 				action="#{listaBean.pag_home()}" />
 		</h:form>
 	</ui:define>

@@ -13,66 +13,68 @@
     <ui:define name="content">
         <h:form>
            <h:panelGrid columns="3">
-                <h:outputLabel value="id:" />
+                <h:outputLabel value="#{msgs.alter_lista_id}" />
                 <h:outputLabel value="#{listaBean.compras.idListaCompras}" id="idCompras" />
                 <h:message for="idCompras" styleClass="erro" />
                 
-                <h:outputLabel value="nome da lista de compras:" for="nomeCompras"/>
-                <h:inputText value="#{listaBean.compras.nomeListaCompras}" id="nomeCompras" label="nome-Compras" required="true"/>
+                <h:outputLabel value="#{msgs.alter_lista_nome_lista}" for="nomeCompras"/>
+                <h:inputText value="#{listaBean.compras.nomeListaCompras}" id="nomeCompras" label="nomeCompras" 
+                required="true" requiredMessage="#{msgs.erro_alter_lista_nome}"/>
                 <h:message for="nomeCompras" styleClass="erro" />
                 
-                <h:outputLabel value="data da lista de compras:" for="dataCompras" />
-                <h:inputText value="#{listaBean.compras.dataListaCompras}" id="dataCompras" label="data-Compras"/>
+                <h:outputLabel value="#{msgs.alter_lista_data_compras}" for="dataCompras" />
+                <h:inputText value="#{listaBean.compras.dataListaCompras}" id="dataCompras" label="dataCompras" 
+                required="true" requiredMessage="#{msgs.erro_alter_lista_data}"/>
                 <h:message for="dataCompras" styleClass="erro" />
 
-                <h:outputLabel value="quantidade de produtos:" for="qtdeProdutos"/>
+                <h:outputLabel value="#{msgs.alter_lista_quantidade_produto}" for="qtdeProdutos"/>
                 <h:outputLabel value="#{listaBean.compras.qtdProduto}" id="qtdeProdutos" />
                 <h:message for="qtdeProdutos" styleClass="erro" />
             </h:panelGrid>
 
-			<h:commandButton value="alterar cabeçalho da lista" action="#{listaBean.alterarCompra()}"/>
+			<h:commandButton value="#{msgs.alter_lista_alterar_cabecalho}" action="#{listaBean.alterarCompra()}"/>
 
             <h:dataTable value="#{listaBean.compras.listaProdutos}" var="lp"          
                          styleClass="tabela" captionClass="tabelaCaption" 
                          headerClass="tabelaHeader" 
                          rowClasses="linhaPar, linhaImpar">
-                <f:facet name="caption">lista de produtos</f:facet>
+                <f:facet name="caption">#{msgs.alter_lista_lista_produtos}</f:facet>
                 <h:column>
-                    <f:facet name="header">Id</f:facet>
+                    <f:facet name="header">#{msgs.alter_lista_table_id}</f:facet>
                     <h:outputLabel value="#{lp.id}" />
                 </h:column>
                 <h:column>
-                    <f:facet name="header">nome</f:facet>
+                    <f:facet name="header">#{msgs.alter_lista_table_nome}</f:facet>
                     <h:inputText value="#{lp.nome}" id="nome"/>
                 </h:column>
                 <h:column>
-                    <f:facet name="header">marca</f:facet>
+                    <f:facet name="header">#{msgs.alter_lista_table_marca}</f:facet>
                     <h:inputText value="#{lp.marca}" id="marca"/>
                 </h:column>
                 <h:column>
-                    <f:facet name="header">quantidade</f:facet>
+                    <f:facet name="header">#{msgs.alter_lista_table_quantidade}</f:facet>
                     <h:inputText value="#{lp.quantidade}" id="quantidade"/>
                 </h:column>
                 <h:column>
-                    <f:facet name="header">descrição</f:facet>
+                    <f:facet name="header">#{msgs.alter_lista_table_descricao}</f:facet>
                     <h:inputText value="#{lp.descricao}" id="descricao"/>
                 </h:column>
                 <h:column>
-                    <f:facet name="header">valor</f:facet>
+                    <f:facet name="header">#{msgs.alter_lista_table_valor}</f:facet>
                     <h:inputText value="#{lp.valorProduto}" id="valor"/>
                 </h:column>
                 <h:column>
-                    <f:facet name="header">data</f:facet>
+                    <f:facet name="header">#{msgs.alter_lista_table_data}</f:facet>
                     <h:inputText value="#{lp.dataProduto}" id="data"/>
                 </h:column>
                 <h:column>
-                    <f:facet name="header">mercado</f:facet>
+                    <f:facet name="header">#{msgs.alter_lista_table_mercado}</f:facet>
                     <h:inputText value="#{lp.mercado}" id="mercado"/>
                 </h:column>
                 
                 <h:column>
                     <f:facet name="header"> </f:facet>
-                	<h:commandButton value="alterar" action="#{listaBean.alterarProduto(lp)}"/>
+                	<h:commandButton value="#{msgs.alter_lista_botao_alterar}" action="#{listaBean.alterarProduto(lp)}"/>
                 </h:column>
                 
             </h:dataTable>

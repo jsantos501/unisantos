@@ -68,13 +68,17 @@ public class UserBean implements Serializable {
 	public void englishLocale() {  
 		UIViewRoot viewRoot = FacesContext.getCurrentInstance().getViewRoot();  
 		currentLocale = Locale.US;  
-		viewRoot.setLocale(currentLocale);  
+		viewRoot.setLocale(currentLocale); 
+        Locale.setDefault(currentLocale);
+
 	}  
 	
 	public void portugueseLocale() {  
 		UIViewRoot viewRoot = FacesContext.getCurrentInstance().getViewRoot();  
 		currentLocale = new Locale("pt", "br");  
 		viewRoot.setLocale(currentLocale);  
+        Locale.setDefault(currentLocale);
+
 	}  
 	
 
@@ -195,8 +199,14 @@ public class UserBean implements Serializable {
 	protected String getMessage(String key) {
 		UIViewRoot viewRoot = FacesContext.getCurrentInstance().getViewRoot();  
 	   	Locale locale = viewRoot.getLocale();
-	   	ResourceBundle text = ResourceBundle.getBundle("message.messages", locale);
+	   	ResourceBundle text = ResourceBundle.getBundle(Constantes.MESSAGE_MESSAGES, locale);
 	    return text.getString(key);
+	}
+
+
+
+	public void setCurrentLocale(Locale currentLocale) {
+		this.currentLocale = currentLocale;
 	}
     
 }

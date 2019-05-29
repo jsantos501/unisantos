@@ -1,9 +1,15 @@
 package session;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 import javax.faces.application.FacesMessage;
+import javax.faces.component.UIViewRoot;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
+
+import constantes.Constantes;
 
 public class SessionContext {
 	private static SessionContext instance = null;
@@ -44,6 +50,14 @@ public class SessionContext {
                 new FacesMessage(value));
 	
     }
+    
+    public static String getMessage(String key) {
+		UIViewRoot viewRoot = FacesContext.getCurrentInstance().getViewRoot();  
+	   	Locale locale = viewRoot.getLocale();
+	   	ResourceBundle text = ResourceBundle.getBundle(Constantes.MESSAGE_MESSAGES, locale);
+	    return text.getString(key);
+	}
+
 	
 }
 

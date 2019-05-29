@@ -6,76 +6,69 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
 
-    <ui:define name="top">
-        Home - consulta de lista de produtos
-    </ui:define>
-
     <ui:define name="content">
         <h:form>
         
 			<h:panelGrid columns="3" styleClass="tabela" border="1">
 				<h:panelGrid columns="2">
-					<h:outputLabel value="lista:" for="nomeCompras" />
+					<h:outputLabel value="#{msgs.ex_lista_lista}" for="nomeCompras" />
 					<h:outputLabel
 						value="#{listaBean.compras.idListaCompras}-#{listaBean.compras.nomeListaCompras}" />
 				</h:panelGrid>
 				<h:panelGrid columns="2">
-					<h:outputLabel value="data:" for="dataCompras" />
+					<h:outputLabel value="#{msgs.ex_lista_data}" for="dataCompras" />
 					<h:outputLabel value="#{listaBean.compras.dataListaCompras}" />
 				</h:panelGrid>
 				<h:panelGrid columns="2">
-					<h:outputLabel value="qtde:" for="qtdeProdutos" />
+					<h:outputLabel value="#{msgs.ex_lista_qtde}" for="qtdeProdutos" />
 					<h:outputLabel value="#{listaBean.compras.qtdProduto}" />
 				</h:panelGrid>
 			</h:panelGrid>
-			<h:commandButton value="exluir esta lista de compras" action="#{listaBean.excluirCompra()}"/>
+			<h:commandButton value="#{msgs.ex_lista_botao_excluir_compras}" action="#{listaBean.excluirCompra()}"/>
 			
 
             <h:dataTable value="#{listaBean.compras.listaProdutos}" var="lp"          
                          styleClass="tabela" captionClass="tabelaCaption" 
                          headerClass="tabelaHeader" 
                          rowClasses="linhaPar, linhaImpar">
-                <f:facet name="caption">lista de produtos</f:facet>
+                <f:facet name="caption">#{msgs.ex_lista_lista_produtos}</f:facet>
                 <h:column>
-                    <f:facet name="header">pego</f:facet>
+                    <f:facet name="header">#{msgs.ex_lista_pego}</f:facet>
                		<h:selectBooleanCheckbox value="#{lp.pego}" disabled="true"/>
                 </h:column>
                 <h:column>
-                    <f:facet name="header">nome</f:facet>
+                    <f:facet name="header">#{msgs.ex_lista_nome}</f:facet>
                     <h:commandLink value="#{lp.id}-#{lp.nome}" action="#{listaBean.pag_detalhe_lista(lc)}"/>
                 </h:column>
                 <h:column>
-                    <f:facet name="header">marca</f:facet>
+                    <f:facet name="header">#{msgs.ex_lista_marca}</f:facet>
                     <h:outputText value="#{lp.marca}"/>
                 </h:column>
                 <h:column>
-                    <f:facet name="header">quantidade</f:facet>
+                    <f:facet name="header">#{msgs.ex_lista_quantidade}</f:facet>
                     <h:outputText value="#{lp.quantidade} #{lp.unidadeMedida}"/>
                 </h:column>
                 <h:column>
-                    <f:facet name="header">descrição</f:facet>
+                    <f:facet name="header">#{msgs.ex_lista_descricao}</f:facet>
                     <h:outputText value="#{lp.descricao}"/>
                 </h:column>
                 <h:column>
-                    <f:facet name="header">valor</f:facet>
+                    <f:facet name="header">#{msgs.ex_lista_valor}</f:facet>
                     <h:outputText value="#{lp.valorProduto}"/>
                 </h:column>
                 <h:column>
-                    <f:facet name="header">data</f:facet>
+                    <f:facet name="header">#{msgs.ex_lista_data}</f:facet>
                     <h:outputText value="#{lp.dataProduto}"/>
                 </h:column>
                 <h:column>
-                    <f:facet name="header">mercado</f:facet>
+                    <f:facet name="header">#{msgs.ex_lista_mercado}</f:facet>
                     <h:outputText value="#{lp.mercado}"/>
                 </h:column>
                  <h:column>
                     <f:facet name="header"> </f:facet>
-                	<h:commandButton value="excluir" action="#{listaBean.excluirProduto(lp)}"/>
+                	<h:commandButton value="#{msgs.ex_lista_excluir}" action="#{listaBean.excluirProduto(lp)}"/>
         		</h:column>
-           
             </h:dataTable>
-
        </h:form>
     </ui:define>
-
 </ui:composition>

@@ -6,116 +6,128 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
 
-    <ui:define name="top">
-        Home - consulta de lista de produtos
-    </ui:define>
-
+ 
     <ui:define name="content">
         <h:form>
         
 			<h:panelGrid columns="3" styleClass="tabela" border="1">
 				<h:panelGrid columns="2">
-					<h:outputLabel value="lista:" for="nomeCompras" />
+					<h:outputLabel value="#{msgs.lista_ponto}" for="nomeCompras" />
 					<h:outputLabel
 						value="#{listaBean.compras.idListaCompras}-#{listaBean.compras.nomeListaCompras}" />
 				</h:panelGrid>
 				<h:panelGrid columns="2">
-					<h:outputLabel value="data:" for="dataCompras" />
+					<h:outputLabel value="#{msgs.data_ponto}" for="dataCompras" />
 					<h:outputLabel value="#{listaBean.compras.dataListaCompras}" />
 				</h:panelGrid>
 				<h:panelGrid columns="2">
-					<h:outputLabel value="qtde:" for="qtdeProdutos" />
+					<h:outputLabel value="#{msgs.qtde_ponto}" for="qtdeProdutos" />
 					<h:outputLabel value="#{listaBean.compras.qtdProduto}" />
 				</h:panelGrid>
 			</h:panelGrid>
 
 		
-			<h:outputLabel value="adicionar novo produto"/>
+			<h1><h:outputLabel value="#{msgs.lista_produto_adicionar_novo_produto}"/></h1>
 			
-			<h:panelGrid columns="3">
-				<h:outputLabel value="nome:" for="produto" />
+			<h:panelGrid columns="3" id="idPanelGridAddProduto">
+				<h:outputLabel value="#{msgs.nome_produto_ponto}" for="produto" />
 				<h:inputText value="#{listaBean.produto.nome}"
-					id="produto" label="produto" required="true" requiredMessage="nome do produto é obrigatório" />
+					id="produto" label="produto" required="true" requiredMessage="nome do produto é obrigatório"  validatorMessage="#{msgs.validator_cadastro_nome_produto_ponto}" >
+						<f:validateLength minimum="1" maximum="20"/>
+					</h:inputText>
 				<h:message for="produto" styleClass="erro" />
 
-				<h:outputLabel value="marca:" for="marca" />
+				<h:outputLabel value="#{msgs.marca_ponto}" for="marca" />
 				<h:inputText value="#{listaBean.produto.marca}"
-					id="marca" label="marca" required="true" />
+					id="marca" label="marca" required="true"  validatorMessage="#{msgs.validator_cadastro_marca_ponto}" >
+						<f:validateLength minimum="1" maximum="20"/>
+					</h:inputText>
 				<h:message for="marca" styleClass="erro" />
 
-				<h:outputLabel value="descrição:" for="descricao" />
+				<h:outputLabel value="#{msgs.descricao_produto_ponto}" for="descricao" />
 				<h:inputText value="#{listaBean.produto.descricao}"
-					id="descricao" label="descricao" required="true" />
+					id="descricao" label="descricao" required="true" validatorMessage="#{msgs.validator_cadastro_descricao_produto_ponto}" >
+						<f:validateLength minimum="1" maximum="20"/>
+					</h:inputText>
 				<h:message for="descricao" styleClass="erro" />
 
 
-				<h:outputLabel value="preço:" for="valorProduto" />
+				<h:outputLabel value="#{msgs.preco_ponto}" for="valorProduto" />
 				<h:inputText value="#{listaBean.produto.valorProduto}"
-					id="valorProduto" label="preço do produto" required="true"/>
+					id="valorProduto" label="preço do produto" required="true" converterMessage="#{msgs.convert_cadastro_valor_erro}" >
+					<f:convertNumber type="currency" minIntegerDigits="1" maxFractionDigits="2" maxIntegerDigits="4" />
+					</h:inputText>
 				<h:message for="valorProduto" styleClass="erro" />
 
-				<h:outputLabel value="tamanho:" for="quantidade" />
+				<h:outputLabel value="#{msgs.tamanho_ponto}" for="quantidade" />
 				<h:inputText value="#{listaBean.produto.quantidade}"
-					id="quantidade" label="tamanho" required="true"/>
+					id="quantidade" label="tamanho" required="true" converterMessage="#{msgs.convert_cadastro_tamanho_ponto}" >
+					<f:convertNumber type="number" integerOnly="true" minIntegerDigits="1" maxIntegerDigits="2"/>
+					</h:inputText>
 				<h:message for="quantidade" styleClass="erro" />
 
-				<h:outputLabel value="mercado:" for="mercado" />
+				<h:outputLabel value="#{msgs.mercado_ponto}" for="mercado" />
 				<h:inputText value="#{listaBean.produto.mercado}"
-					id="mercado" label="mercado" required="true" />
+					id="mercado" label="mercado" required="true"  validatorMessage="#{msgs.validator_cadastro_mercado_ponto}" >
+					<f:validateLength minimum="1" maximum="20"/>
+					</h:inputText>
 				<h:message for="mercado" styleClass="erro" />
 			</h:panelGrid>
 
-			<h:commandButton value="add produto na lista"
-				action="#{listaBean.addProdutoEmDetalhe()}" />
+			<h:commandButton value="#{msgs.add_produto_lista}"
+				action="#{listaBean.addProdutoEmDetalhe()}" >
+				</h:commandButton>
 
        </h:form>
         <h:form>
 
 
-            <h:dataTable value="#{listaBean.compras.listaProdutos}" var="lp"          
+            <h:dataTable id="idDataTableListaProdutos" value="#{listaBean.compras.listaProdutos}" var="lp"          
                          styleClass="tabela" captionClass="tabelaCaption" 
                          headerClass="tabelaHeader" 
                          rowClasses="linhaPar, linhaImpar">
-                <f:facet name="caption">lista de produtos</f:facet>
+                <f:facet name="caption">#{msgs.lista_lista_produtos}</f:facet>
                 <h:column>
                     <f:facet name="header">pego</f:facet>
                		<h:selectBooleanCheckbox value="#{lp.pego}" />
                 </h:column>
                 <h:column>
-                    <f:facet name="header">nome</f:facet>
+                    <f:facet name="header">#{msgs.lista_nome}</f:facet>
                     <h:outputText value="#{lp.id}-#{lp.nome}"/>
                 </h:column>
                 <h:column>
-                    <f:facet name="header">marca</f:facet>
+                    <f:facet name="header">#{msgs.lista_marca}</f:facet>
                     <h:outputText value="#{lp.marca}"/>
                 </h:column>
                 <h:column>
-                    <f:facet name="header">quantidade</f:facet>
+                    <f:facet name="header">#{msgs.lista_quantidade}</f:facet>
                     <h:outputText value="#{lp.quantidade} #{lp.unidadeMedida}"/>
                 </h:column>
                 <h:column>
-                    <f:facet name="header">descrição</f:facet>
+                    <f:facet name="header">#{msgs.lista_descricao}</f:facet>
                     <h:outputText value="#{lp.descricao}"/>
                 </h:column>
                 <h:column>
-                    <f:facet name="header">valor</f:facet>
+                    <f:facet name="header">#{msgs.lista_valor}</f:facet>
                     <h:outputText value="#{lp.valorProduto}"/>
                 </h:column>
                 <h:column>
-                    <f:facet name="header">data</f:facet>
+                    <f:facet name="header">#{msgs.lista_data}</f:facet>
                     <h:outputText value="#{lp.dataProduto}"/>
                 </h:column>
                 <h:column>
-                    <f:facet name="header">mercado</f:facet>
+                    <f:facet name="header">#{msgs.lista_mercado}</f:facet>
                     <h:outputText value="#{lp.mercado}"/>
                 </h:column>
                 <h:column>
-                	<h:commandButton value="excluir" action="#{listaBean.excluirProdutoEmDetalhe(lp)}"/>
+                	<h:commandButton value="#{msgs.ex_lista_excluir}" action="#{listaBean.excluirProdutoEmDetalhe(lp)}">
+                					<f:ajax render="@form"></f:ajax>
+                	</h:commandButton>
                	</h:column>
                
                 <f:facet name="footer">
 	            	<h:column>
-	            		<h:outputText value="valor total: R$ 0,00"/>
+	            		<h:outputText value="#{msgs.valor_total_lista_produto} R$ 0,00"/>
                		</h:column>
        			</f:facet>
             </h:dataTable>
