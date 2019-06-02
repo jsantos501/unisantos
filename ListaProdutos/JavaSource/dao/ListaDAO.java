@@ -11,12 +11,14 @@ import mock.MockDados;
 import model.Contato;
 import model.ListaCompras;
 import model.Produto;
+import model.Usuario;
 
 public class ListaDAO {
 
 	
 	    private static final String SQL_INSERIR_LISTA_COMPRAS = "insert into contatos (nome, email, endereco) values(?,?,?)";
-	    private static final String SQL_LISTAR_CONTATOS = "select * from contatos order by nome";
+	    private static final String SQL_LISTAR_COMPRAS = "SELECT compras_produtos.id, compras_produtos.idCompra, compras_produtos.idProduto, compras.nome as nomeCompras, compras.data as dataCompras	FROM unisantos.compras_produtos	join unisantos.compras on compras_produtos.idCompra = compras.id where compras.idUser = ?";
+	    ;
 	    private static final String SQL_CONSULTAR_CONTATO = "select * from contatos where nome like ? order by nome";
 	    private static final String SQL_EXCLUIR_CONTATO = "delete from contatos where id = ?";
 	    private static final String SQL_ALTERAR_COMPRAS = "update contatos set nome=?, email=?, endereco=? where id=?";
@@ -127,31 +129,33 @@ public class ListaDAO {
 //	        }
 	    }	    
 	    
-	    public List<ListaCompras> listar() throws SQLException {
-	        List<ListaCompras> listasCompras = new ArrayList<>();
-//	        try {
-//	            connection = ConnectionFactory.getConnection();
-//	            try {
-//	                PreparedStatement stmt = connection.
-//	                        prepareStatement(SQL_LISTAR_CONTATOS);
-	                listasCompras = MockDados.getListarListasCompras();
-//	                ResultSet rs = stmt.executeQuery();
-//	                while (rs.next()) {
-//	                	Produto c = new Produto();
-//	                    c.setId(rs.getLong("id"));
-//	                    c.setNome(rs.getString("nome"));
-//	                    c.setEmail(rs.getString("email"));
-//	                    c.setEndereco(rs.getString("endereco"));
-//	                    listaProduto.add(c);
-//	                }
-//	                stmt.close();
-//	                rs.close();
-//	            } finally {
-//	                connection.close();
-//	            }
-//	        } catch (SQLException e) {
-//	            throw e;
-//	        }
+	    public List<ListaCompras> listar(Usuario usuario) throws SQLException {
+	    	
+	        List<ListaCompras> listasCompras = new ArrayList<ListaCompras>();
+	        try {
+	            connection = ConnectionFactory.getConnection();
+	            try {
+	                PreparedStatement stmt = connection.
+	                        prepareStatement(SQL_LISTAR_COMPRAS);
+//	                listasCompras = MockDados.getListarListasCompras()
+	                
+	                ResultSet rs = stmt.executeQuery();
+	                while (rs.next()) {
+	                	ListaCompras c = new ListaCompras();
+	                	
+	                    c.setIdListaCompras(String.valueOf(rs.getInt("id")));
+	                    c.setDataListaCompras(rs.getString("dataCompras"));
+	                    c.setNomeListaCompras(rs.getString("nomeCompras"));
+	                    listasCompras.add(c);
+	                }
+	                stmt.close();
+	                rs.close();
+	            } finally {
+	                connection.close();
+	            }
+	        } catch (SQLException e) {
+	            throw e;
+	        }
 	        return listasCompras;
 	    }
 	    

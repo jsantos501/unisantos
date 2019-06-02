@@ -11,7 +11,6 @@ public class Produto  implements Serializable {
 	private String nome;
 	private String marca;
 	private String quantidade;
-	private String unidadeMedida;
 	private String descricao;
 	private String valorProduto;
 	private String dataProduto;
@@ -46,12 +45,7 @@ public class Produto  implements Serializable {
 	public void setQuantidade(String quantidade) {
 		this.quantidade = quantidade;
 	}
-	public String getUnidadeMedida() {
-		return unidadeMedida;
-	}
-	public void setUnidadeMedida(String unidadeMedida) {
-		this.unidadeMedida = unidadeMedida;
-	}
+
 	public String getDescricao() {
 		return descricao;
 	}

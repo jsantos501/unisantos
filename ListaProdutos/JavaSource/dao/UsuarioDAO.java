@@ -20,11 +20,11 @@ public class UsuarioDAO {
 
 
 	
-    private static final String SQL_INSERIR_USUARIO = "insert into contatos (nome, email, endereco) values(?,?,?)";
-    private static final String SQL_LISTAR_USUARIO = "select * from contatos order by nome";
-    private static final String SQL_CONSULTAR_USUARIO = "select * from usuarios where user=? and senha=?";
-    private static final String SQL_EXCLUIR_USUARIO = "delete from contatos where id = ?";
-    private static final String SQL_ALTERAR_USUARIO = "update contatos set nome=?, email=?, endereco=? where id=?";
+    private static final String SQL_INSERIR_USUARIO = "INSERT INTO unisantos.usuario (login, senha, perfil, nome, cpf, email, cep, celular) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+    private static final String SQL_LISTAR_USUARIO = "select * from unisantos.usuario order by login";
+    private static final String SQL_CONSULTAR_USUARIO = "select * from unisantos.usuario where login=? and senha=?";
+    private static final String SQL_EXCLUIR_USUARIO = "delete from unisantos.usuario where id = ?";
+    private static final String SQL_ALTERAR_USUARIO = "UPDATE unisantos.usuario SET login = ?, senha = ?, perfil = ?, nome = ?, cpf = ?, email = ?, cep = ?, celular = ? WHERE `id` = ?";
 
     private Connection connection;
 
@@ -32,7 +32,7 @@ public class UsuarioDAO {
         try {
             connection = ConnectionFactory.getConnection();
             try {
-                PreparedStatement stmt = connection.prepareStatement(SQL_INSERIR_USUARIO);
+                PreparedStatement stmt = connection.prepareStatement(SQL_LISTAR_USUARIO);
 //                stmt.setString(1, produto.getNome());
 //                stmt.setString(2, produto.getEmail());
 //                stmt.setString(3, produto.getEndereco());
@@ -47,63 +47,70 @@ public class UsuarioDAO {
     }
 
     public List<Usuario> listar() throws SQLException {
-        List<Usuario> listaUsuario = new ArrayList<>();
-        listaUsuario = MockDados.getListaUsuarios();
-//        try {
-//            connection = ConnectionFactory.getConnection();
-//            try {
-//                PreparedStatement stmt = connection.
-//                        prepareStatement(SQL_LISTAR_USUARIO);
-//                ResultSet rs = stmt.executeQuery();
-//                while (rs.next()) {
-//                	Produto c = new Produto();
-//                    c.setId(rs.getLong("id"));
-//                    c.setNome(rs.getString("nome"));
-//                    c.setEmail(rs.getString("email"));
-//                    c.setEndereco(rs.getString("endereco"));
-//                	listaUsuario.add(c);
-//                }
-//                stmt.close();
-//                rs.close();
-//            } finally {
-//                connection.close();
-//            }
-//        } catch (SQLException e) {
-//            throw e;
-//        }
+        List<Usuario> listaUsuario = new ArrayList<Usuario>();
+ //       listaUsuario = MockDados.getListaUsuarios();
+        try {
+            connection = ConnectionFactory.getConnection();
+            try {
+                PreparedStatement stmt = connection.
+                        prepareStatement(SQL_LISTAR_USUARIO);
+                ResultSet rs = stmt.executeQuery();
+                while (rs.next()) {
+                	Usuario u = new Usuario();
+                  	u.setId(String.valueOf(rs.getInt("id")));
+                  	u.setLogin(rs.getString("login"));
+                  	u.setSenha(rs.getString("senha"));
+                  	u.setPerfil(String.valueOf(rs.getInt("perfil")));
+                  	u.setNome(rs.getString("nome"));
+                  	u.setCpf(String.valueOf(rs.getLong("cpf")));
+                  	u.setEmail(rs.getString("email"));
+                  	u.setCep(String.valueOf(rs.getInt("cep")));
+                  	u.setCelular(String.valueOf(rs.getLong("celular")));
+                	listaUsuario.add(u);
+                }
+                stmt.close();
+                rs.close();
+            } finally {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            throw e;
+        }
         return listaUsuario;
     }
     
     public Usuario consultar(String usuario, String senha) throws SQLException {
-    	Usuario user = null;
-//        try {
-//            connection = ConnectionFactory.getConnection();
-//            try {
-//                PreparedStatement stmt = connection.
-//                        prepareStatement(SQL_CONSULTAR_USUARIO);
-//                stmt.setString(1, usuario);
-//                stmt.setString(2, senha);
-//                
-//                ResultSet rs = stmt.executeQuery();
-//                while (rs.next()) {
-    	user = MockDados.getUsuario();
-
-//                    Contato c = new Contato();
-//                    c.setId(rs.getLong("id"));
-//                    c.setNome(rs.getString("nome"));
-//                    c.setEmail(rs.getString("email"));
-//                    c.setEndereco(rs.getString("endereco"));
-//                    contatos.add(c);
-//                }
-//                stmt.close();
-//                rs.close();
-//            } finally {
-//                connection.close();
-//            }
-//        } catch (SQLException e) {
-//            throw e;
-//        }
-        return user;
+    	Usuario u = null;
+        try {
+            connection = ConnectionFactory.getConnection();
+            try {
+                PreparedStatement stmt = connection.
+                        prepareStatement(SQL_CONSULTAR_USUARIO);
+                stmt.setString(1, usuario);
+                stmt.setString(2, senha);
+                
+                ResultSet rs = stmt.executeQuery();
+                while (rs.next()) {
+                	u = new Usuario();
+                  	u.setId(String.valueOf(rs.getInt("id")));
+                  	u.setLogin(rs.getString("login"));
+                  	u.setSenha(rs.getString("senha"));
+                  	u.setPerfil(String.valueOf(rs.getInt("perfil")));
+                  	u.setNome(rs.getString("nome"));
+                  	u.setCpf(String.valueOf(rs.getLong("cpf")));
+                  	u.setEmail(rs.getString("email"));
+                  	u.setCep(String.valueOf(rs.getInt("cep")));
+                  	u.setCelular(String.valueOf(rs.getLong("celular")));
+                }
+                stmt.close();
+                rs.close();
+            } finally {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            throw e;
+        }
+        return u;
     }
     
     public void excluir(Long id) throws SQLException {
@@ -126,7 +133,6 @@ public class UsuarioDAO {
         try {
             connection = ConnectionFactory.getConnection();
             try {
-                System.out.println(contato);
                 PreparedStatement stmt = connection.prepareStatement(SQL_ALTERAR_USUARIO);
                 stmt.setString(1, contato.getNome());
                 stmt.setString(2, contato.getEmail());
@@ -142,57 +148,75 @@ public class UsuarioDAO {
         }
     }
     
-    public List<Usuario> addUsuario(List<Usuario> lista, Usuario usuario) throws SQLException {
-//        try {
-//            connection = ConnectionFactory.getConnection();
-//            try {
-//                PreparedStatement stmt = connection.prepareStatement(SQL_INSERIR_LISTA_COMPRAS);
-    			return MockDados.addUsuarioNaLista(lista, usuario);
-//                stmt.setString(1, compras.getNomeListaCompras());
-//                stmt.execute();
-//                stmt.close();
-//            } finally {
-//                connection.close();
-//            }
-//        } catch (SQLException ex) {
-//            throw ex;
-//        }
+    public void addUsuario(Usuario usuario) throws SQLException {
+        try {
+            connection = ConnectionFactory.getConnection();
+            try {
+            	
+                PreparedStatement stmt = connection.prepareStatement(SQL_INSERIR_USUARIO);
+//    			return MockDados.addUsuarioNaLista(lista, usuario);
+                stmt.setString(1, usuario.getLogin());
+                stmt.setString(2, usuario.getSenha());
+                stmt.setInt(3, Integer.parseInt(usuario.getPerfil()));
+                stmt.setString(4, usuario.getNome());
+                stmt.setLong(5, Long.parseLong(usuario.getCpf()));
+                stmt.setString(6, usuario.getEmail());
+                stmt.setInt(7, Integer.parseInt(usuario.getCep()));
+                stmt.setLong(8, Long.parseLong(usuario.getCelular()));
+                
+                stmt.execute();
+                stmt.close();
+            } finally {
+                connection.close();
+            }
+        } catch (SQLException ex) {
+            throw ex;
+        }
     }
 
 	
-    public List<Usuario> excluirUsuario(List<Usuario> lista, Usuario usuario) throws SQLException {
-//        try {
-//            connection = ConnectionFactory.getConnection();
-//            try {
-//                PreparedStatement stmt = connection.prepareStatement(SQL_ALTERAR_PRODUTO);
-    			return MockDados.removeProdutoNaLista(lista, usuario);
-//                stmt.setString(1, compras.getNomeListaCompras());
-//                stmt.execute();
-//                stmt.close();
-//            } finally {
-//                connection.close();
-//            }
-//        } catch (SQLException ex) {
-//            throw ex;
-//        }
+    public void excluirUsuario(Usuario usuario) throws SQLException {
+        try {
+            connection = ConnectionFactory.getConnection();
+            try {
+                PreparedStatement stmt = connection.prepareStatement(SQL_EXCLUIR_USUARIO);
+//    			return MockDados.removeProdutoNaLista(lista, usuario);
+                stmt.setInt(1, Integer.parseInt(usuario.getId()));
+                stmt.execute();
+                stmt.close();
+            } finally {
+                connection.close();
+            }
+        } catch (SQLException ex) {
+            throw ex;
+        }
     }
     
     
-    public List<Usuario> alterarUsuario(List<Usuario> lista, Usuario usuario) throws SQLException {
-//        try {
-//            connection = ConnectionFactory.getConnection();
-//            try {
-//                PreparedStatement stmt = connection.prepareStatement(SQL_ALTERAR_PRODUTO);
-    			return MockDados.attUsuarioNaLista(lista, usuario);
-//                stmt.setString(1, compras.getNomeListaCompras());
-//                stmt.execute();
-//                stmt.close();
-//            } finally {
-//                connection.close();
-//            }
-//        } catch (SQLException ex) {
-//            throw ex;
-//        }
+    public void alterarUsuario(Usuario usuario) throws SQLException {
+        try {
+            connection = ConnectionFactory.getConnection();
+            try {
+                PreparedStatement stmt = connection.prepareStatement(SQL_ALTERAR_USUARIO);
+//    			return MockDados.attUsuarioNaLista(lista, usuario);
+                stmt.setString(1, usuario.getLogin());
+                stmt.setString(2, usuario.getSenha());
+                stmt.setInt(3, Integer.parseInt(usuario.getPerfil()));
+                stmt.setString(4, usuario.getNome());
+                stmt.setLong(5, Long.parseLong(usuario.getCpf()));
+                stmt.setString(6, usuario.getEmail());
+                stmt.setLong(7, Long.parseLong(usuario.getCep()));
+                stmt.setLong(8, Long.parseLong(usuario.getCelular()));
+                stmt.setInt(9, Integer.parseInt(usuario.getId()));
+                
+                stmt.execute();
+                stmt.close();
+            } finally {
+                connection.close();
+            }
+        } catch (SQLException ex) {
+            throw ex;
+        }
     }
     
 }

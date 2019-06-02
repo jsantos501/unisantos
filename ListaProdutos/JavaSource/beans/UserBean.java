@@ -7,9 +7,7 @@ package beans;
 
 import java.io.Serializable;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
@@ -27,8 +25,6 @@ import constantes.Constantes;
 import dao.ListaDAO;
 import dao.UsuarioDAO;
 import model.ListaCompras;
-import model.Produto;
-import model.User;
 import model.Usuario;
 import session.SessionContext;
 
@@ -81,7 +77,7 @@ public class UserBean implements Serializable {
 
 	}  
 	
-
+	
     public String validar() throws SQLException {
     	UsuarioDAO userDao = new UsuarioDAO();
     	Usuario usuarioValidado = userDao.consultar(user.getLogin(), user.getSenha());
@@ -89,7 +85,7 @@ public class UserBean implements Serializable {
     	
         if (usuarioValidado != null) {
         	ListaDAO dao = new ListaDAO();
-        	listasCompras = dao.listar();
+        	listasCompras = dao.listar(usuarioValidado);
         	SessionContext.getInstance().setAttribute(Constantes.KEY_SESSION_USUARIO_LOGADO, usuarioValidado);
         	SessionContext.getInstance().setAttribute(Constantes.KEY_SESSION_LISTAS_COMPRAS, listasCompras);
             return "/home";
@@ -125,20 +121,23 @@ public class UserBean implements Serializable {
  	}
 	
 	public String excluirUsuarioSel(Usuario userSel) throws SQLException {
-    	listaUsuarios = userDAO.excluirUsuario(listaUsuarios, userSel);
+    	userDAO.excluirUsuario(userSel);
+    	listaUsuarios = userDAO.listar();
     	SessionContext.getInstance().setAttribute(Constantes.KEY_SESSION_LISTA_USUARIOS, listaUsuarios);
     	return "/lista_usuarios";
  	}    
 
     public String addUsuario() throws SQLException{
-    	listaUsuarios = userDAO.addUsuario(listaUsuarios, usuario);
+    	userDAO.addUsuario(usuario);
+    	listaUsuarios = userDAO.listar();
     	usuario = new Usuario();
     	SessionContext.getInstance().setAttribute(Constantes.KEY_SESSION_LISTA_USUARIOS, listaUsuarios);
     	return "/lista_usuarios";
     }
 
     public String attUsuario() throws SQLException{
-    	listaUsuarios = userDAO.alterarUsuario(listaUsuarios, usuario);
+    	userDAO.alterarUsuario(usuario);
+    	listaUsuarios = userDAO.listar();
     	usuario = new Usuario();
     	SessionContext.getInstance().setAttribute(Constantes.KEY_SESSION_LISTA_USUARIOS, listaUsuarios);
     	return "/lista_usuarios";

@@ -17,13 +17,18 @@ import java.util.logging.Logger;
  * @author ciro
  */
 public class ConnectionFactory {
-    private static final String DATABASE_URL = "jdbc:mysql://localhost/agenda";
+	//jdbc:mysql://localhost:3306/unisantos?useTimezone=true&serverTimezone=UTC
+    private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/unisantos?useTimezone=true&serverTimezone=UTC";
     private static final String DATABASE_USER = "root";
     private static final String DATABASE_PASSWORD = "root";
     
     public static Connection getConnection() throws SQLException {
         try {
-            return DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASSWORD);
+        	//Class.forName("com.mysql.jdbc.Driver");
+        	DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+        	Connection con = DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASSWORD);
+        	
+            return con;
         } catch (SQLException ex) {
             Logger.getLogger(ConnectionFactory.class.getName()).log(Level.SEVERE, null, ex);
             throw ex;

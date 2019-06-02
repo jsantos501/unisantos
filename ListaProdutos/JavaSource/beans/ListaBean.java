@@ -14,6 +14,7 @@ import javax.inject.Named;
 
 import constantes.Constantes;
 import dao.ListaDAO;
+import dao.ProdutoDAO;
 import model.ListaCompras;
 import model.Produto;
 import session.SessionContext;
@@ -32,9 +33,11 @@ public class ListaBean  implements Serializable {
 	private ListaCompras compras;
 	private Produto produto;
 	
-    public String pag_detalhe_lista(ListaCompras listaCompras) {
+    public String pag_detalhe_lista(ListaCompras listaCompras) throws SQLException {
     	setCompras(listaCompras);
     	setProduto(new Produto());
+    	ProdutoDAO produtoDAO = new ProdutoDAO();
+    	listaCompras.setListaProdutos(produtoDAO.listar(listaCompras));
     	
     	SessionContext.getInstance().setAttribute(Constantes.KEY_SESSION_COMPRAS_SELECIONADA, listaCompras);
     	return "/lista_compras";
@@ -104,7 +107,6 @@ public class ListaBean  implements Serializable {
 
     	produto.setDataProduto(sdf.format(Calendar.getInstance().getTime()));
     	produto.setPego("false");
-    	produto.setUnidadeMedida("");    	
     	
     	compras = listaDAO.addProduto(compras,produto);
     	produto = new Produto();
@@ -119,7 +121,6 @@ public class ListaBean  implements Serializable {
 
     	produto.setDataProduto(sdf.format(Calendar.getInstance().getTime()));
     	produto.setPego("false");
-    	produto.setUnidadeMedida("");    	
     	
     	compras = listaDAO.addProduto(compras,produto);
     	produto = new Produto();

@@ -63,7 +63,6 @@ public class MockDados {
 		produto.setNome("carne moida");
 		produto.setMarca("friboi");
 		produto.setQuantidade("500");
-		produto.setUnidadeMedida("gramas");
 		produto.setDescricao("carne moida de primeira qualidade friboi");
 		produto.setValorProduto("R$ 5,00");
 		produto.setDataProduto("10/05/2019");
@@ -78,7 +77,6 @@ public class MockDados {
 		produto.setNome("tempero de carne");
 		produto.setMarca("maggi");
 		produto.setQuantidade("100");
-		produto.setUnidadeMedida("gramas");
 		produto.setDescricao("tempero maggi para dar um toque profissional ao seu prato");
 		produto.setValorProduto("R$ 10,00");
 		produto.setDataProduto("10/05/2019");
@@ -93,7 +91,6 @@ public class MockDados {
 		produto.setNome("cerveja pilsen");
 		produto.setMarca("eisenbahn");
 		produto.setQuantidade("350");
-		produto.setUnidadeMedida("mililitros");
 		produto.setDescricao("Cerveja Eisenbahn Pilsen Puro Malte 350Ml");
 		produto.setValorProduto("R$ 2,99");
 		produto.setDataProduto("10/05/2019");
