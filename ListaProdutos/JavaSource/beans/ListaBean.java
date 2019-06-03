@@ -92,23 +92,26 @@ public class ListaBean  implements Serializable {
     
     public String addLista() throws SQLException{
     	ListaDAO listaDAO = new ListaDAO();
-    	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		compras.setDataListaCompras(sdf.format(Calendar.getInstance().getTime()));
     	compras.setListaProdutos(new ArrayList<Produto>());
     	compras.setQtdProduto("0");
-    	
-    	compras = listaDAO.cadastrar(compras);
+    	listaDAO.cadastrar(compras);
+
     	return "/cadastrar_lista_2";
     }
     
     public String addProduto() throws SQLException{
     	ListaDAO listaDAO = new ListaDAO();
-    	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    	ProdutoDAO produtoDAO = new ProdutoDAO();
+    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     	produto.setDataProduto(sdf.format(Calendar.getInstance().getTime()));
-    	produto.setPego("false");
+    	produto.setPego("0");
     	
-    	compras = listaDAO.addProduto(compras,produto);
+    	produtoDAO.adicionar(produto);
+    	produto = produtoDAO.buscarProduto(produto);
+    	compras = listaDAO.addProdutoNaLista(compras,produto);
     	produto = new Produto();
     	
     	return "/cadastrar_lista_2";

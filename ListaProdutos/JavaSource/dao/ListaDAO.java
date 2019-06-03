@@ -16,9 +16,15 @@ import model.Usuario;
 public class ListaDAO {
 
 	
-	    private static final String SQL_INSERIR_LISTA_COMPRAS = "insert into contatos (nome, email, endereco) values(?,?,?)";
+	    private static final String SQL_INSERIR_LISTA_COMPRAS = "INSERT INTO unisantos.compras (nome, data, idUser) VALUES (?, ?, ?)";
+
+	    private static final String SQL_INSERIR_PRODUTO_LISTA_COMPRAS = "INSERT INTO unisantos.compras_produtos (idCompra, idProduto) VALUES (?, ?)";
+	    
+	    
+
+
+	    
 	    private static final String SQL_LISTAR_COMPRAS = "SELECT compras_produtos.id, compras_produtos.idCompra, compras_produtos.idProduto, compras.nome as nomeCompras, compras.data as dataCompras	FROM unisantos.compras_produtos	join unisantos.compras on compras_produtos.idCompra = compras.id where compras.idUser = ?";
-	    ;
 	    private static final String SQL_CONSULTAR_CONTATO = "select * from contatos where nome like ? order by nome";
 	    private static final String SQL_EXCLUIR_CONTATO = "delete from contatos where id = ?";
 	    private static final String SQL_ALTERAR_COMPRAS = "update contatos set nome=?, email=?, endereco=? where id=?";
@@ -26,39 +32,42 @@ public class ListaDAO {
 
 	    private Connection connection;
 
-	    public ListaCompras cadastrar(ListaCompras compras) throws SQLException {
-//	        try {
-//	            connection = ConnectionFactory.getConnection();
-//	            try {
-//	                PreparedStatement stmt = connection.prepareStatement(SQL_INSERIR_LISTA_COMPRAS);
-	    			return MockDados.criaNovaLista(compras);
-//	                stmt.setString(1, compras.getNomeListaCompras());
-//	                stmt.execute();
-//	                stmt.close();
-//	            } finally {
-//	                connection.close();
-//	            }
-//	        } catch (SQLException ex) {
-//	            throw ex;
-//	        }
+	    public void cadastrar(ListaCompras compras) throws SQLException {
+	        try {
+	            connection = ConnectionFactory.getConnection();
+	            try {
+	                PreparedStatement stmt = connection.prepareStatement(SQL_INSERIR_LISTA_COMPRAS);
+//	    			return MockDados.criaNovaLista(compras);
+	                stmt.setString(1, compras.getNomeListaCompras());
+	                stmt.setString(2, compras.getDataListaCompras());
+	                stmt.setString(3, compras.getIdUser());
+	                stmt.execute();
+	                stmt.close();
+	            } finally {
+	                connection.close();
+	            }
+	        } catch (SQLException ex) {
+	            throw ex;
+	        }
 	    }
 
 
-	    public ListaCompras addProduto(ListaCompras compras, Produto produto) throws SQLException {
-//	        try {
-//	            connection = ConnectionFactory.getConnection();
-//	            try {
-//	                PreparedStatement stmt = connection.prepareStatement(SQL_INSERIR_LISTA_COMPRAS);
-	    			return MockDados.addProdutoNaLista(compras, produto);
-//	                stmt.setString(1, compras.getNomeListaCompras());
-//	                stmt.execute();
-//	                stmt.close();
-//	            } finally {
-//	                connection.close();
-//	            }
-//	        } catch (SQLException ex) {
-//	            throw ex;
-//	        }
+	    public void addProdutoNaLista(ListaCompras compras, Produto produto) throws SQLException {
+	        try {
+	            connection = ConnectionFactory.getConnection();
+	            try {
+	                PreparedStatement stmt = connection.prepareStatement(SQL_INSERIR_PRODUTO_LISTA_COMPRAS);
+//	    			return MockDados.addProdutoNaLista(compras, produto);
+	                stmt.setInt(1, Integer.parseInt(compras.getIdListaCompras()));
+	                stmt.setInt(2, Integer.parseInt(produto.getId()));
+		            stmt.execute();
+	                stmt.close();
+	            } finally {
+	                connection.close();
+	            }
+	        } catch (SQLException ex) {
+	            throw ex;
+	        }
 	    }
 
 	    public ListaCompras alterarProduto(ListaCompras compras, Produto produto) throws SQLException {
