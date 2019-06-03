@@ -17,6 +17,7 @@ import dao.ListaDAO;
 import dao.ProdutoDAO;
 import model.ListaCompras;
 import model.Produto;
+import model.Usuario;
 import session.SessionContext;
 
 @Named(value = "listaBean")
@@ -56,9 +57,17 @@ public class ListaBean  implements Serializable {
 	}    
     
     public String alterarCompra() throws SQLException{
+    	
      	ListaDAO listaDAO = new ListaDAO();
-     	compras = listaDAO.alterarLista(compras);
-    	return "/alterar_lista_1";
+    	Usuario user = (Usuario) SessionContext.getInstance().getAttribute(Constantes.KEY_SESSION_USUARIO_LOGADO);
+    	compras.setIdUser(user.getId());
+     	listaDAO.alterarLista(compras);
+     	
+     	
+       List<ListaCompras> listasCompras = listaDAO.listar(user);
+    	SessionContext.getInstance().setAttribute(Constantes.KEY_SESSION_LISTAS_COMPRAS, listasCompras);
+        return "/home";
+
     }
     
     
@@ -70,22 +79,31 @@ public class ListaBean  implements Serializable {
     
     public String excluirProduto(Produto produtoSel) throws SQLException {
     	ListaDAO listaDAO = new ListaDAO();
-    	compras = listaDAO.excluirProduto(compras, produtoSel);
+    	ProdutoDAO produtoDAO = new  ProdutoDAO();
+    	
+    	listaDAO.excluirProduto(compras, produtoSel);
+    	compras.setListaProdutos(produtoDAO.listar(compras));
     	return "/excluir_lista_1";
 	}    
 
     public String excluirProdutoEmDetalhe(Produto produtoSel) throws SQLException {
     	ListaDAO listaDAO = new ListaDAO();
-    	compras = listaDAO.excluirProduto(compras, produtoSel);
+    	ProdutoDAO produtoDAO = new  ProdutoDAO();
+    	listaDAO.excluirProduto(compras, produtoSel);
+    	compras.setListaProdutos(produtoDAO.listar(compras));
+
     	return "/lista_compras";
 	}    
 
     
     public String excluirCompra() throws SQLException{
      	ListaDAO listaDAO = new ListaDAO();
-     	compras = listaDAO.excluirLista(compras);
-    	SessionContext.getInstance().addMessage(Constantes.MESSAGE_FORM_SUCCESS, "exclusão da lista de compras realizado com sucesso.");
-    	return "/home";
+     	listaDAO.excluirLista(compras);
+     	Usuario user = (Usuario) SessionContext.getInstance().getAttribute(Constantes.KEY_SESSION_USUARIO_LOGADO);
+
+        List<ListaCompras> listasCompras = listaDAO.listar(user);
+     	SessionContext.getInstance().setAttribute(Constantes.KEY_SESSION_LISTAS_COMPRAS, listasCompras);
+         return "/home";
     }
     
     
@@ -96,7 +114,12 @@ public class ListaBean  implements Serializable {
 		compras.setDataListaCompras(sdf.format(Calendar.getInstance().getTime()));
     	compras.setListaProdutos(new ArrayList<Produto>());
     	compras.setQtdProduto("0");
+    	Usuario user = (Usuario) SessionContext.getInstance().getAttribute(Constantes.KEY_SESSION_USUARIO_LOGADO);
+
+    	compras.setIdUser(user.getId());
     	listaDAO.cadastrar(compras);
+    	compras = listaDAO.consultar(compras);
+    	SessionContext.getInstance().setAttribute(Constantes.KEY_SESSION_COMPRAS_SELECIONADA, compras);
 
     	return "/cadastrar_lista_2";
     }
@@ -111,7 +134,8 @@ public class ListaBean  implements Serializable {
     	
     	produtoDAO.adicionar(produto);
     	produto = produtoDAO.buscarProduto(produto);
-    	compras = listaDAO.addProdutoNaLista(compras,produto);
+    	listaDAO.addProdutoNaLista(compras,produto);
+    	compras = listaDAO.listaProdutos(compras);
     	produto = new Produto();
     	
     	return "/cadastrar_lista_2";
@@ -120,12 +144,21 @@ public class ListaBean  implements Serializable {
     
     public String addProdutoEmDetalhe() throws SQLException{
     	ListaDAO listaDAO = new ListaDAO();
-    	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    	
+    	ProdutoDAO produtoDAO = new ProdutoDAO();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     	produto.setDataProduto(sdf.format(Calendar.getInstance().getTime()));
-    	produto.setPego("false");
+    	produto.setPego("0");
     	
-    	compras = listaDAO.addProduto(compras,produto);
+    //	compras = listaDAO.addProduto(compras,produto);
+    	produtoDAO.adicionar(produto);
+    	produto = produtoDAO.buscarProduto(produto);
+    	listaDAO.addProdutoNaLista(compras,produto);
+    	compras = listaDAO.listaProdutos(compras);
+    	
+    	
+    	
     	produto = new Produto();
     	
     	return "/lista_compras";

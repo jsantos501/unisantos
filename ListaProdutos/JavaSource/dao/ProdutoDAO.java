@@ -90,16 +90,17 @@ public class ProdutoDAO {
                 PreparedStatement stmt = connection.
                         prepareStatement(SQL_CONSULTAR_PRODUTO);
                 
-                stmt.setString(1, produto.getNome());
-                stmt.setString(2, produto.getMarca());
-                stmt.setInt(3, Integer.parseInt(produto.getQuantidade()));
-                stmt.setString(4, produto.getDescricao());
-                stmt.setDouble(5, Double.parseDouble(produto.getValorProduto()));
-                stmt.setString(6, produto.getDataProduto());
-                stmt.setString(7, produto.getMercado());
+                stmt.setInt(1, Integer.parseInt(produto.getPego()));
+                stmt.setString(2, produto.getNome());
+                stmt.setString(3, produto.getMarca());
+                stmt.setInt(4, Integer.parseInt(produto.getQuantidade()));
+                stmt.setString(5, produto.getDescricao());
+                stmt.setDouble(6, Double.parseDouble(produto.getValorProduto()));
+                stmt.setString(7, produto.getDataProduto());
+                stmt.setString(8, produto.getMercado());
                 
                 ResultSet rs = stmt.executeQuery();
-                if(rs.isFirst()){
+                if(rs.isBeforeFirst()){
 	                while (rs.next()) {
 	                	produto.setId(String.valueOf(rs.getInt("id")));
 	                      }

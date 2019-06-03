@@ -18,14 +18,6 @@
                 <h:commandLink value="#{lc.idListaCompras} - #{lc.nomeListaCompras}" action="#{listaBean.pag_detalhe_lista(lc)}"/>
                 
                 </h:column>
-                <h:column>
-                    <f:facet name="header">#{msgs.qtde_produto}</f:facet>
-                    <h:outputText value="#{lc.qtdProduto}"/>
-                </h:column>
-              	<h:column>
-                    <f:facet name="header">#{msgs.usuario}</f:facet>
-                    <h:outputText value="#{lc.idUser}"/>
-                </h:column>
               	<h:column>
                     <f:facet name="header">#{msgs.alterar}</f:facet>
                 <h:commandLink value="alterar" action="#{listaBean.pag_alterar_1(lc)}"/>

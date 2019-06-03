@@ -53,7 +53,7 @@ CREATE TABLE `unisantos`.`compras` (
   
   ALTER TABLE `unisantos`.`compras` 
 ADD CONSTRAINT `idUser`
-  FOREIGN KEY (`id`)
+  FOREIGN KEY (`idUser`)
   REFERENCES `unisantos`.`usuario` (`id`)
   ON DELETE NO ACTION
   ON UPDATE NO ACTION;
