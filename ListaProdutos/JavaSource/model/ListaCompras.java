@@ -7,6 +7,10 @@ import javax.enterprise.context.Dependent;
 
 @Dependent
 public class ListaCompras  implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6655653731241151404L;
 	private String idListaCompras;
 	private String nomeListaCompras;
 	private String dataListaCompras;

@@ -8,8 +8,6 @@ import java.util.Calendar;
 import java.util.List;
 
 import javax.enterprise.context.SessionScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 import constantes.Constantes;
@@ -51,8 +49,6 @@ public class ListaBean  implements Serializable {
     }
     
     public String alterarProduto(Produto produtoSel) throws SQLException {
-    	ListaDAO listaDAO = new ListaDAO();
-    	compras = listaDAO.alterarProduto(compras, produtoSel);
     	return "/alterar_lista_1";
 	}    
     
@@ -151,7 +147,6 @@ public class ListaBean  implements Serializable {
     	produto.setDataProduto(sdf.format(Calendar.getInstance().getTime()));
     	produto.setPego("0");
     	
-    //	compras = listaDAO.addProduto(compras,produto);
     	produtoDAO.adicionar(produto);
     	produto = produtoDAO.buscarProduto(produto);
     	listaDAO.addProdutoNaLista(compras,produto);

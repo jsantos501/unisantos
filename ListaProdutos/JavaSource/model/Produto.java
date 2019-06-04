@@ -6,6 +6,10 @@ import javax.enterprise.context.Dependent;
 
 @Dependent
 public class Produto  implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7810451511090909294L;
 	private String id;
 	private String pego;
 	private String nome;

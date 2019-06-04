@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Contato;
 import model.ListaCompras;
 import model.Produto;
 
@@ -21,7 +20,6 @@ public class ProdutoDAO {
     private static final String SQL_CONSULTAR_PRODUTO = "SELECT * FROM unisantos.produto where produto.pego = ? and produto.nome = ? and produto.marca = ? and produto.quantidade = ? and produto.descricao = ? and produto.valorProduto = ? and produto.dataProduto = ? and produto.mercado = ?";
     
     private static final String SQL_EXCLUIR_PRODUTO = "delete from contatos where id = ?";
-    private static final String SQL_ALTERAR_PRODUTO = "update contatos set nome=?, email=?, endereco=? where id=?";
 
     private Connection connection;
 
@@ -132,28 +130,7 @@ public class ProdutoDAO {
         } catch (SQLException ex) {
             throw ex;
         }
-    }
-
-    public void alterar(Contato contato) throws SQLException {
-        try {
-            connection = ConnectionFactory.getConnection();
-            try {
-                System.out.println(contato);
-                PreparedStatement stmt = connection.prepareStatement(SQL_ALTERAR_PRODUTO);
-                stmt.setString(1, contato.getNome());
-                stmt.setString(2, contato.getEmail());
-                stmt.setString(3, contato.getEndereco());
-                stmt.setLong(4, contato.getId());
-                stmt.execute();
-                stmt.close();
-            } finally {
-                connection.close();
-            }
-        } catch (SQLException ex) {
-            throw ex;
-        }
-    }
-    
+    }    
 
 	
 }

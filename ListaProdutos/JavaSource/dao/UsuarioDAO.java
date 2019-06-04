@@ -7,11 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.enterprise.context.Dependent;
-
-import mock.MockDados;
-import model.Contato;
-import model.ListaCompras;
 import model.Produto;
 import model.Usuario;
 
@@ -33,9 +28,6 @@ public class UsuarioDAO {
             connection = ConnectionFactory.getConnection();
             try {
                 PreparedStatement stmt = connection.prepareStatement(SQL_LISTAR_USUARIO);
-//                stmt.setString(1, produto.getNome());
-//                stmt.setString(2, produto.getEmail());
-//                stmt.setString(3, produto.getEndereco());
                 stmt.execute();
                 stmt.close();
             } finally {
@@ -48,7 +40,6 @@ public class UsuarioDAO {
 
     public List<Usuario> listar() throws SQLException {
         List<Usuario> listaUsuario = new ArrayList<Usuario>();
- //       listaUsuario = MockDados.getListaUsuarios();
         try {
             connection = ConnectionFactory.getConnection();
             try {
@@ -129,32 +120,13 @@ public class UsuarioDAO {
         }
     }
 
-    public void alterar(Contato contato) throws SQLException {
-        try {
-            connection = ConnectionFactory.getConnection();
-            try {
-                PreparedStatement stmt = connection.prepareStatement(SQL_ALTERAR_USUARIO);
-                stmt.setString(1, contato.getNome());
-                stmt.setString(2, contato.getEmail());
-                stmt.setString(3, contato.getEndereco());
-                stmt.setLong(4, contato.getId());
-                stmt.execute();
-                stmt.close();
-            } finally {
-                connection.close();
-            }
-        } catch (SQLException ex) {
-            throw ex;
-        }
-    }
-    
+   
     public void addUsuario(Usuario usuario) throws SQLException {
         try {
             connection = ConnectionFactory.getConnection();
             try {
             	
                 PreparedStatement stmt = connection.prepareStatement(SQL_INSERIR_USUARIO);
-//    			return MockDados.addUsuarioNaLista(lista, usuario);
                 stmt.setString(1, usuario.getLogin());
                 stmt.setString(2, usuario.getSenha());
                 stmt.setInt(3, Integer.parseInt(usuario.getPerfil()));
@@ -180,7 +152,6 @@ public class UsuarioDAO {
             connection = ConnectionFactory.getConnection();
             try {
                 PreparedStatement stmt = connection.prepareStatement(SQL_EXCLUIR_USUARIO);
-//    			return MockDados.removeProdutoNaLista(lista, usuario);
                 stmt.setInt(1, Integer.parseInt(usuario.getId()));
                 stmt.execute();
                 stmt.close();
@@ -198,7 +169,6 @@ public class UsuarioDAO {
             connection = ConnectionFactory.getConnection();
             try {
                 PreparedStatement stmt = connection.prepareStatement(SQL_ALTERAR_USUARIO);
-//    			return MockDados.attUsuarioNaLista(lista, usuario);
                 stmt.setString(1, usuario.getLogin());
                 stmt.setString(2, usuario.getSenha());
                 stmt.setInt(3, Integer.parseInt(usuario.getPerfil()));

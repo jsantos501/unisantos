@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Random;
 
 import model.ListaCompras;
-import model.Mercado;
 import model.Produto;
 import model.Usuario;
 
