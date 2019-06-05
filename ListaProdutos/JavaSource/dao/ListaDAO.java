@@ -16,7 +16,7 @@ public class ListaDAO {
 	private static final String SQL_INSERIR_LISTA_COMPRAS = "INSERT INTO unisantos.compras (nome, data, idUser) VALUES (?, ?, ?)";
 
 	private static final String SQL_INSERIR_PRODUTO_LISTA_COMPRAS = "INSERT INTO unisantos.compras_produtos (idCompra, idProduto) VALUES (?, ?)";
-	private static final String SQL_LISTAR_COMPRAS = "SELECT compras_produtos.id, compras_produtos.idCompra, compras_produtos.idProduto, compras.nome as nomeCompras, compras.data as dataCompras FROM unisantos.compras_produtos join unisantos.compras on compras_produtos.idCompra = compras.id where compras.idUser = ?";
+	private static final String SQL_LISTAR_COMPRAS = "SELECT id as idCompra, compras.nome as nomeCompras, compras.data as dataCompras FROM unisantos.compras where compras.idUser = ?";
 	private static final String SQL_PRODUTOS_LISTA_SELECIONADA = "SELECT p.id, p.pego, p.nome, p.marca, p.quantidade, p.descricao, p.valorProduto, p.dataProduto, p.mercado FROM unisantos.compras_produtos as cp join unisantos.produto as p on cp.idProduto = p.id WHERE cp.idCompra = ?";
 
 	private static final String SQL_CONSULTAR_LISTA_COMPRAS = "SELECT compras.id, compras.nome, compras.data, compras.idUser FROM unisantos.compras WHERE compras.nome = ? AND compras.data = ? AND compras.idUser = ?";

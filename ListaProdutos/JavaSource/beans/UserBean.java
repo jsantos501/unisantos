@@ -86,6 +86,16 @@ public class UserBean implements Serializable {
 		return null;
 	}
 
+    public String pag_home() throws SQLException {
+    	Usuario user = (Usuario) SessionContext.getInstance().getAttribute(Constantes.KEY_SESSION_USUARIO_LOGADO);
+		ListaDAO dao = new ListaDAO();
+
+    	listasCompras = dao.listar(user);
+		SessionContext.getInstance().setAttribute(Constantes.KEY_SESSION_LISTAS_COMPRAS, listasCompras);
+
+    	return "/home";
+    }
+	
 	public String[] getAnosFormacao() {
 		String[] anos = new String[50];
 		int anoAtual = new GregorianCalendar().get(GregorianCalendar.YEAR);

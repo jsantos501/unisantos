@@ -10,7 +10,7 @@
     <ui:define name="content">
         <h:form>
         
-			<h:panelGrid columns="3" styleClass="tabela" border="1">
+			<h:panelGrid columns="2" styleClass="tabela" border="1">
 				<h:panelGrid columns="2">
 					<h:outputLabel value="#{msgs.lista_ponto}" for="nomeCompras" />
 					<h:outputLabel
@@ -19,10 +19,6 @@
 				<h:panelGrid columns="2">
 					<h:outputLabel value="#{msgs.data_ponto}" for="dataCompras" />
 					<h:outputLabel value="#{listaBean.compras.dataListaCompras}" />
-				</h:panelGrid>
-				<h:panelGrid columns="2">
-					<h:outputLabel value="#{msgs.qtde_ponto}" for="qtdeProdutos" />
-					<h:outputLabel value="#{listaBean.compras.qtdProduto}" />
 				</h:panelGrid>
 			</h:panelGrid>
 

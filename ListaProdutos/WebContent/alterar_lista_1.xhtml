@@ -6,9 +6,6 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
 
-    <ui:define name="top">
-        Home - consulta de lista de produtos
-    </ui:define>
 
     <ui:define name="content">
         <h:form>
@@ -27,9 +24,6 @@
                 required="true" requiredMessage="#{msgs.erro_alter_lista_data}"/>
                 <h:message for="dataCompras" styleClass="erro" />
 
-                <h:outputLabel value="#{msgs.alter_lista_quantidade_produto}" for="qtdeProdutos"/>
-                <h:outputLabel value="#{listaBean.compras.qtdProduto}" id="qtdeProdutos" />
-                <h:message for="qtdeProdutos" styleClass="erro" />
             </h:panelGrid>
 
 			<h:commandButton value="#{msgs.alter_lista_alterar_cabecalho}" action="#{listaBean.alterarCompra()}"/>
