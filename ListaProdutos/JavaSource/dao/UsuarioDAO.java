@@ -7,6 +7,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+
+import connection.JPAEntityManager;
 import model.Produto;
 import model.Usuario;
 
@@ -48,7 +56,7 @@ public class UsuarioDAO {
                 ResultSet rs = stmt.executeQuery();
                 while (rs.next()) {
                 	Usuario u = new Usuario();
-                  	u.setId(String.valueOf(rs.getInt("id")));
+             //     	u.setId(String.valueOf(rs.getInt("id")));
                   	u.setLogin(rs.getString("login"));
                   	u.setSenha(rs.getString("senha"));
                   	u.setPerfil(String.valueOf(rs.getInt("perfil")));
@@ -72,36 +80,54 @@ public class UsuarioDAO {
     
     public Usuario consultar(String usuario, String senha) throws SQLException {
     	Usuario u = null;
-        try {
-            connection = ConnectionFactory.getConnection();
-            try {
-                PreparedStatement stmt = connection.
-                        prepareStatement(SQL_CONSULTAR_USUARIO);
-                stmt.setString(1, usuario);
-                stmt.setString(2, senha);
-                
-                ResultSet rs = stmt.executeQuery();
-                while (rs.next()) {
-                	u = new Usuario();
-                  	u.setId(String.valueOf(rs.getInt("id")));
-                  	u.setLogin(rs.getString("login"));
-                  	u.setSenha(rs.getString("senha"));
-                  	u.setPerfil(String.valueOf(rs.getInt("perfil")));
-                  	u.setNome(rs.getString("nome"));
-                  	u.setCpf(String.valueOf(rs.getLong("cpf")));
-                  	u.setEmail(rs.getString("email"));
-                  	u.setCep(String.valueOf(rs.getInt("cep")));
-                  	u.setCelular(String.valueOf(rs.getLong("celular")));
-                }
-                stmt.close();
-                rs.close();
-            } finally {
-                connection.close();
-            }
-        } catch (SQLException e) {
-            throw e;
-        }
-        return u;
+
+		EntityManager manager = JPAEntityManager.getEntityManager();
+		
+		Query query = manager.createQuery("SELECT u FROM Usuario u WHERE u.login=:pLogin AND u.senha=:pSenha", Usuario.class);
+
+		query.setParameter("pLogin", usuario);	
+		query.setParameter("pSenha", senha);	
+		try {
+			u = (Usuario) query.getSingleResult();
+		}catch (NoResultException e) {
+			u = null;
+		}finally {
+			manager.close();
+		}
+	
+		return u;
+    	
+		
+    	
+//    	try {
+//            try {
+//                PreparedStatement stmt = connection.
+//                        prepareStatement(SQL_CONSULTAR_USUARIO);
+//                stmt.setString(1, usuario);
+//                stmt.setString(2, senha);
+//                
+//                ResultSet rs = stmt.executeQuery();
+//                while (rs.next()) {
+//                	u = new Usuario();
+//                  	u.setId(String.valueOf(rs.getInt("id")));
+//                  	u.setLogin(rs.getString("login"));
+//                  	u.setSenha(rs.getString("senha"));
+//                  	u.setPerfil(String.valueOf(rs.getInt("perfil")));
+//                  	u.setNome(rs.getString("nome"));
+//                  	u.setCpf(String.valueOf(rs.getLong("cpf")));
+//                  	u.setEmail(rs.getString("email"));
+//                  	u.setCep(String.valueOf(rs.getInt("cep")));
+//                  	u.setCelular(String.valueOf(rs.getLong("celular")));
+//                }
+//                stmt.close();
+//                rs.close();
+//            } finally {
+//                connection.close();
+//            }
+//        } catch (SQLException e) {
+//            throw e;
+//        }
+//        return u;
     }
     
     public void excluir(Long id) throws SQLException {
@@ -152,7 +178,7 @@ public class UsuarioDAO {
             connection = ConnectionFactory.getConnection();
             try {
                 PreparedStatement stmt = connection.prepareStatement(SQL_EXCLUIR_USUARIO);
-                stmt.setInt(1, Integer.parseInt(usuario.getId()));
+    //            stmt.setInt(1, Integer.parseInt(usuario.getId()));
                 stmt.execute();
                 stmt.close();
             } finally {
@@ -177,7 +203,7 @@ public class UsuarioDAO {
                 stmt.setString(6, usuario.getEmail());
                 stmt.setLong(7, Long.parseLong(usuario.getCep()));
                 stmt.setLong(8, Long.parseLong(usuario.getCelular()));
-                stmt.setInt(9, Integer.parseInt(usuario.getId()));
+     //           stmt.setInt(9, Integer.parseInt(usuario.getId()));
                 
                 stmt.execute();
                 stmt.close();

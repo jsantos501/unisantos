@@ -28,7 +28,7 @@ public class MockDados {
 		compras.setIdListaCompras("1");
 		compras.setNomeListaCompras("Compras do Mes Maio");
 		compras.setDataListaCompras("10/05/2019");
-		compras.setIdUser("1");
+//		compras.setIdUser("1");
 		compras.setListaProdutos(getListaProdutos1());
 		compras.setQtdProduto(""+compras.getListaProdutos().size());
 		return compras;		
@@ -39,7 +39,7 @@ public class MockDados {
 		compras.setIdListaCompras("2");
 		compras.setNomeListaCompras("Compras do Mes Abril");
 		compras.setDataListaCompras("10/04/2019");
-		compras.setIdUser("1");
+//		compras.setIdUser("1");
 		compras.setListaProdutos(getListaProdutos1());
 		compras.setQtdProduto(""+compras.getListaProdutos().size());
 		return compras;		
@@ -57,7 +57,7 @@ public class MockDados {
 	
 	public static Produto getProduto1(){
 		Produto produto = new Produto();
-		produto.setId("1");
+//		produto.setId("1");
 		produto.setPego("true");
 		produto.setNome("carne moida");
 		produto.setMarca("friboi");
@@ -71,7 +71,7 @@ public class MockDados {
 	
 	public static Produto getProduto2(){
 		Produto produto = new Produto();
-		produto.setId("2");
+//		produto.setId("2");
 		produto.setPego("false");
 		produto.setNome("tempero de carne");
 		produto.setMarca("maggi");
@@ -85,7 +85,7 @@ public class MockDados {
 	
 	public static Produto getProduto3(){
 		Produto produto = new Produto();
-		produto.setId("3");
+//		produto.setId("3");
 		produto.setPego("true");
 		produto.setNome("cerveja pilsen");
 		produto.setMarca("eisenbahn");
@@ -111,7 +111,7 @@ public class MockDados {
 
 	public static Usuario getUsuario(){
 		Usuario user = new Usuario();
-		user.setId("1");
+//		user.setId("1");
 		user.setPerfil("admin");
 		user.setSenha("******");
 		user.setLogin("ale");
@@ -133,7 +133,7 @@ public class MockDados {
 	public static ListaCompras addProdutoNaLista(ListaCompras compras, Produto produto){
 
 		Random gerador = new Random();
-		produto.setId(""+ gerador.nextInt(99));
+//		produto.setId(""+ gerador.nextInt(99));
 		for(ListaCompras l:listasCompras) {
 			if(compras.getIdListaCompras().equals(l.getIdListaCompras())) {
 				l.getListaProdutos().add(produto);
@@ -213,7 +213,7 @@ public class MockDados {
 	public static List<Usuario> addUsuarioNaLista(List<Usuario> lista, Usuario user){
 
 		Random gerador = new Random();
-		user.setId(""+ gerador.nextInt(99));
+//		user.setId(""+ gerador.nextInt(99));
 		lista.add(user);
 		
 		return lista;

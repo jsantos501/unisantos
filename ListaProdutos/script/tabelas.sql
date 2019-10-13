@@ -60,8 +60,8 @@ ADD CONSTRAINT `idUser`
   
   
   ALTER TABLE `unisantos`.`compras_produtos` 
-ADD INDEX `id_idx` (`idCompra` ASC) VISIBLE,
-ADD INDEX `idProduto_idx` (`idProduto` ASC) VISIBLE;
+ADD INDEX `id_idx` (`idCompra` ASC) ,
+ADD INDEX `idProduto_idx` (`idProduto` ASC) ;
 ;
 ALTER TABLE `unisantos`.`compras_produtos` 
 ADD CONSTRAINT `idCompra`

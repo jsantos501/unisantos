@@ -27,10 +27,10 @@ public class PageFilter implements Filter {
 		HttpSession sessao = ((HttpServletRequest) request).getSession();
 		Usuario user = (Usuario) sessao.getAttribute(Constantes.KEY_SESSION_USUARIO_LOGADO);
 		String newCurrentPage = ((HttpServletRequest) request).getRequestURI();
-		  
-		if(Constantes.PAGINA_LOGIN_APLICACAO.equals(newCurrentPage)){
+
+		if (Constantes.PAGINA_LOGIN_APLICACAO.equals(newCurrentPage)) {
 			chain.doFilter(request, response);
-		} else if(user != null && user.getLogin() != null) {
+		} else if (user != null && user.getLogin() != null) {
 			chain.doFilter(request, response);
 		} else {
 			sessao.setAttribute(Constantes.MESSAGE, Constantes.OBRIGATORIO_LOGIN_PAGE_SESSION);

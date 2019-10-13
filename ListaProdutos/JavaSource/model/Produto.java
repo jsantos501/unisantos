@@ -3,14 +3,22 @@ package model;
 import java.io.Serializable;
 
 import javax.enterprise.context.Dependent;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+@Entity
 @Dependent
 public class Produto  implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -7810451511090909294L;
-	private String id;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)	
+	private Long id;
 	private String pego;
 	private String nome;
 	private String marca;
@@ -19,10 +27,11 @@ public class Produto  implements Serializable {
 	private String valorProduto;
 	private String dataProduto;
 	private String mercado;
-	public String getId() {
+	
+	public Long getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getPego() {

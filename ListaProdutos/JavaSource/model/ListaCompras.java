@@ -4,19 +4,42 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.enterprise.context.Dependent;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
+@Entity
 @Dependent
 public class ListaCompras  implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -6655653731241151404L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)	
+	private Long id;
+	
 	private String idListaCompras;
+	
 	private String nomeListaCompras;
+	
 	private String dataListaCompras;
-	private String idUser;
-	private List<Produto> listaProdutos;
+	
 	private String qtdProduto;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	private Usuario usuario;
+
+	@OneToMany(cascade=CascadeType.ALL, orphanRemoval=true)
+	@JoinColumn(name = "compra_id")
+	private List<Produto> listaProdutos;
 	
 	
 	public String getIdListaCompras() {
@@ -37,12 +60,6 @@ public class ListaCompras  implements Serializable {
 	public void setDataListaCompras(String dataListaCompras) {
 		this.dataListaCompras = dataListaCompras;
 	}
-	public String getIdUser() {
-		return idUser;
-	}
-	public void setIdUser(String idUser) {
-		this.idUser = idUser;
-	}
 	public List<Produto> getListaProdutos() {
 		return listaProdutos;
 	}
@@ -54,6 +71,19 @@ public class ListaCompras  implements Serializable {
 	}
 	public void setQtdProduto(String qtdProduto) {
 		this.qtdProduto = qtdProduto;
+	}
+
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 	
 	

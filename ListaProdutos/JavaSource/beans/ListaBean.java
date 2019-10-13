@@ -58,7 +58,7 @@ public class ListaBean  implements Serializable {
     	
      	ListaDAO listaDAO = new ListaDAO();
     	Usuario user = (Usuario) SessionContext.getInstance().getAttribute(Constantes.KEY_SESSION_USUARIO_LOGADO);
-    	compras.setIdUser(user.getId());
+//    	compras.setIdUser(user.getId());
      	listaDAO.alterarLista(compras);
      	
      	
@@ -114,7 +114,7 @@ public class ListaBean  implements Serializable {
     	compras.setQtdProduto("0");
     	Usuario user = (Usuario) SessionContext.getInstance().getAttribute(Constantes.KEY_SESSION_USUARIO_LOGADO);
 
-    	compras.setIdUser(user.getId());
+//    	compras.setIdUser(user.getId());
     	listaDAO.cadastrar(compras);
     	compras = listaDAO.consultar(compras);
     	SessionContext.getInstance().setAttribute(Constantes.KEY_SESSION_COMPRAS_SELECIONADA, compras);

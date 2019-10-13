@@ -3,7 +3,12 @@ package model;
 import java.io.Serializable;
 
 import javax.enterprise.context.Dependent;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+@Entity
 @Dependent
 public class Usuario implements Serializable {
 	/**
@@ -11,7 +16,9 @@ public class Usuario implements Serializable {
 	 */
 	private static final long serialVersionUID = 1086125588626003704L;
 	
-	private String id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	private String login;
 	private String senha;
 	private String perfil;
@@ -21,13 +28,14 @@ public class Usuario implements Serializable {
 	private String cep;
 	private String celular;
 	
-	public String getId() {
+
+
+	public Long getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
-
 	public String getLogin() {
 		return login;
 	}

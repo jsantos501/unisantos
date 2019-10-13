@@ -36,7 +36,7 @@ public class ListaDAO {
 				PreparedStatement stmt = connection.prepareStatement(SQL_INSERIR_LISTA_COMPRAS);
 				stmt.setString(1, compras.getNomeListaCompras());
 				stmt.setString(2, compras.getDataListaCompras());// new Date(Calendar.getInstance().getTimeInMillis()));
-				stmt.setInt(3, Integer.parseInt(compras.getIdUser()));
+//				stmt.setInt(3, Integer.parseInt(compras.getIdUser()));
 				stmt.execute();
 				stmt.close();
 			} finally {
@@ -53,7 +53,7 @@ public class ListaDAO {
 			try {
 				PreparedStatement stmt = connection.prepareStatement(SQL_INSERIR_PRODUTO_LISTA_COMPRAS);
 				stmt.setInt(1, Integer.parseInt(compras.getIdListaCompras()));
-				stmt.setInt(2, Integer.parseInt(produto.getId()));
+//				stmt.setInt(2, Integer.parseInt(produto.getId()));
 				stmt.execute();
 				stmt.close();
 			} finally {
@@ -76,7 +76,7 @@ public class ListaDAO {
 				ResultSet rs = stmt.executeQuery();
 				while (rs.next()) {
 					Produto p = new Produto();
-					p.setId(String.valueOf(rs.getInt("id")));
+//					p.setId(String.valueOf(rs.getInt("id")));
 					p.setPego(String.valueOf(rs.getInt("pego")));
 					p.setNome(String.valueOf(rs.getString("nome")));
 					p.setMarca(String.valueOf(rs.getString("marca")));
@@ -124,7 +124,7 @@ public class ListaDAO {
 			try {
 				PreparedStatement stmt = connection.prepareStatement(SQL_EXCLUIR_PRODUTO_NA_LISTA);
 				stmt.setInt(1, Integer.parseInt(compras.getIdListaCompras()));
-				stmt.setInt(2, Integer.parseInt(produto.getId()));
+//				stmt.setInt(2, Integer.parseInt(produto.getId()));
 				stmt.execute();
 				stmt.close();
 			} finally {
@@ -165,7 +165,7 @@ public class ListaDAO {
 			connection = ConnectionFactory.getConnection();
 			try {
 				PreparedStatement stmt = connection.prepareStatement(SQL_LISTAR_COMPRAS);
-				stmt.setInt(1, Integer.parseInt(usuario.getId()));
+//				stmt.setInt(1, Integer.parseInt(usuario.getId()));
 
 				ResultSet rs = stmt.executeQuery();
 				while (rs.next()) {
@@ -194,7 +194,7 @@ public class ListaDAO {
 				PreparedStatement stmt = connection.prepareStatement(SQL_CONSULTAR_LISTA_COMPRAS);
 				stmt.setString(1, compras.getNomeListaCompras());
 				stmt.setString(2, compras.getDataListaCompras());
-				stmt.setInt(3, Integer.parseInt(compras.getIdUser()));
+//				stmt.setInt(3, Integer.parseInt(compras.getIdUser()));
 
 				ResultSet rs = stmt.executeQuery();
 				if (rs.isBeforeFirst()) {

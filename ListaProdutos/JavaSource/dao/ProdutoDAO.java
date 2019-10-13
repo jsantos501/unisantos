@@ -58,7 +58,7 @@ public class ProdutoDAO {
                 ResultSet rs = stmt.executeQuery();
                 while (rs.next()) {
                 	Produto c = new Produto();
-                    c.setId(String.valueOf(rs.getInt("id")));
+//                    c.setId(String.valueOf(rs.getInt("id")));
                     c.setPego(rs.getString("pego"));
                     c.setNome(rs.getString("nomeProduto"));
                     c.setMarca(rs.getString("marcaProduto"));
@@ -100,7 +100,7 @@ public class ProdutoDAO {
                 ResultSet rs = stmt.executeQuery();
                 if(rs.isBeforeFirst()){
 	                while (rs.next()) {
-	                	produto.setId(String.valueOf(rs.getInt("id")));
+//	                	produto.setId(String.valueOf(rs.getInt("id")));
 	                      }
                 }else {
                 	produto = null;
