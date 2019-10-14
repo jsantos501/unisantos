@@ -12,10 +12,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+
+import constantes.Constantes;
 
 @Entity
 @Dependent
+@NamedQueries({
+@NamedQuery(name=Constantes.LISTA_COMPRAS_LISTA_COMPRAS_POR_USUARIO, 
+				query="SELECT lu FROM ListaCompras lu WHERE lu.usuario.login=:pLogin")
+			})
 public class ListaCompras  implements Serializable {
 	/**
 	 * 

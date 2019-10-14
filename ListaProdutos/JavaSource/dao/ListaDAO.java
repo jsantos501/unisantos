@@ -7,6 +7,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.Query;
+
+import connection.JPAEntityManager;
+import constantes.Constantes;
 import model.ListaCompras;
 import model.Produto;
 import model.Usuario;
@@ -160,31 +166,52 @@ public class ListaDAO {
 
 	public List<ListaCompras> listar(Usuario usuario) throws SQLException {
 
-		List<ListaCompras> listasCompras = new ArrayList<ListaCompras>();
+		List<ListaCompras> lu = null;
+
+		EntityManager manager = JPAEntityManager.getEntityManager();
+		Query query = manager.createNamedQuery(Constantes.LISTA_COMPRAS_LISTA_COMPRAS_POR_USUARIO, ListaCompras.class);
+		
+		query.setParameter("pLogin", usuario.getLogin());	
+		
 		try {
-			connection = ConnectionFactory.getConnection();
-			try {
-				PreparedStatement stmt = connection.prepareStatement(SQL_LISTAR_COMPRAS);
-//				stmt.setInt(1, Integer.parseInt(usuario.getId()));
-
-				ResultSet rs = stmt.executeQuery();
-				while (rs.next()) {
-					ListaCompras c = new ListaCompras();
-
-					c.setIdListaCompras(String.valueOf(rs.getInt("idCompra")));
-					c.setDataListaCompras(rs.getString("dataCompras"));
-					c.setNomeListaCompras(rs.getString("nomeCompras"));
-					listasCompras.add(c);
-				}
-				stmt.close();
-				rs.close();
-			} finally {
-				connection.close();
-			}
-		} catch (SQLException e) {
-			throw e;
+			lu = query.getResultList();
+		}catch (NoResultException e) {
+			lu = null;
+		}finally {
+			manager.close();
 		}
-		return listasCompras;
+	
+		return lu;
+		
+		
+		
+//		List<ListaCompras> listasCompras = new ArrayList<ListaCompras>();
+//		
+//		
+//		try {
+//			connection = ConnectionFactory.getConnection();
+//			try {
+//				PreparedStatement stmt = connection.prepareStatement(SQL_LISTAR_COMPRAS);
+//				stmt.setInt(1, Integer.parseInt(usuario.getId()));
+//
+//				ResultSet rs = stmt.executeQuery();
+//				while (rs.next()) {
+//					ListaCompras c = new ListaCompras();
+//
+//					c.setIdListaCompras(String.valueOf(rs.getInt("idCompra")));
+//					c.setDataListaCompras(rs.getString("dataCompras"));
+//					c.setNomeListaCompras(rs.getString("nomeCompras"));
+//					listasCompras.add(c);
+//				}
+//				stmt.close();
+//				rs.close();
+//			} finally {
+//				connection.close();
+//			}
+//		} catch (SQLException e) {
+//			throw e;
+//		}
+//		return listasCompras;
 	}
 
 	public ListaCompras consultar(ListaCompras compras) throws SQLException {

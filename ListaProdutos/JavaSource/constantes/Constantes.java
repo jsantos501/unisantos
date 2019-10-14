@@ -15,4 +15,6 @@ public class Constantes {
 	public final static String OBRIGATORIO_LOGIN_PAGE = "obrigatorio_login_page";
 	public final static String OBRIGATORIO_LOGIN_PAGE_SESSION = "É obrigatório realizar o registro.";
 
+	public final static String USUARIO_USUARIO_POR_LOGIN_E_SENHA = "Usuario.usuarioPorLoginESenha";
+	public final static String LISTA_COMPRAS_LISTA_COMPRAS_POR_USUARIO = "ListaCompras.ListaComprasPorUsuario";
 }

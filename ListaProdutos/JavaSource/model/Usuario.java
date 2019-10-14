@@ -7,9 +7,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+
+import constantes.Constantes;
 
 @Entity
 @Dependent
+@NamedQueries({
+	 @NamedQuery(name=Constantes.USUARIO_USUARIO_POR_LOGIN_E_SENHA, 
+			 query="SELECT u FROM Usuario u WHERE u.login=:pLogin AND u.senha=:pSenha")
+	})
 public class Usuario implements Serializable {
 	/**
 	 * 

@@ -15,6 +15,7 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import connection.JPAEntityManager;
+import constantes.Constantes;
 import model.Produto;
 import model.Usuario;
 
@@ -82,9 +83,7 @@ public class UsuarioDAO {
     	Usuario u = null;
 
 		EntityManager manager = JPAEntityManager.getEntityManager();
-		
-		Query query = manager.createQuery("SELECT u FROM Usuario u WHERE u.login=:pLogin AND u.senha=:pSenha", Usuario.class);
-
+		Query query = manager.createNamedQuery(Constantes.USUARIO_USUARIO_POR_LOGIN_E_SENHA, Usuario.class);
 		query.setParameter("pLogin", usuario);	
 		query.setParameter("pSenha", senha);	
 		try {
