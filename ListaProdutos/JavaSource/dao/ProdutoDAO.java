@@ -7,6 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
+import connection.JPAEntityManager;
 import model.ListaCompras;
 import model.Produto;
 
@@ -47,39 +50,46 @@ public class ProdutoDAO {
         }
     }
 
-    public List<Produto> listar(ListaCompras compras) throws SQLException {
-        List<Produto> listaProduto = new ArrayList<Produto>();
-        try {
-            connection = ConnectionFactory.getConnection();
-            try {
-                PreparedStatement stmt = connection.
-                        prepareStatement(SQL_LISTAR_PRODUTO);
-                stmt.setInt(1, Integer.parseInt(compras.getIdListaCompras()));
-                ResultSet rs = stmt.executeQuery();
-                while (rs.next()) {
-                	Produto c = new Produto();
-//                    c.setId(String.valueOf(rs.getInt("id")));
-                    c.setPego(rs.getString("pego"));
-                    c.setNome(rs.getString("nomeProduto"));
-                    c.setMarca(rs.getString("marcaProduto"));
-                    c.setQuantidade(String.valueOf(rs.getInt("quantidade")));
-                    c.setDescricao(rs.getString("descricao"));
-                    c.setValorProduto(String.valueOf(rs.getDouble("valorProduto")));
-                    c.setDataProduto(rs.getString("dataProduto"));
-                    c.setMercado(rs.getString("mercado"));
-                    
-                    listaProduto.add(c);
-                }
-                stmt.close();
-                rs.close();
-            } finally {
-                connection.close();
-            }
-        } catch (SQLException e) {
-            throw e;
-        }
-        return listaProduto;
-    }
+    public void listar(ListaCompras compras) throws SQLException {
+
+		EntityManager manager = JPAEntityManager.getEntityManager();
+		compras = manager.find(ListaCompras.class, compras);
+		manager.close();
+	}
+    	
+//    	xxxx
+//        List<Produto> listaProduto = new ArrayList<Produto>();
+//        try {
+//            connection = ConnectionFactory.getConnection();
+//            try {
+//                PreparedStatement stmt = connection.
+//                        prepareStatement(SQL_LISTAR_PRODUTO);
+//                stmt.setInt(1, Integer.parseInt(compras.getIdListaCompras()));
+//                ResultSet rs = stmt.executeQuery();
+//                while (rs.next()) {
+//                	Produto c = new Produto();
+////                    c.setId(String.valueOf(rs.getInt("id")));
+//                    c.setPego(rs.getString("pego"));
+//                    c.setNome(rs.getString("nomeProduto"));
+//                    c.setMarca(rs.getString("marcaProduto"));
+//                    c.setQuantidade(String.valueOf(rs.getInt("quantidade")));
+//                    c.setDescricao(rs.getString("descricao"));
+//                    c.setValorProduto(String.valueOf(rs.getDouble("valorProduto")));
+//                    c.setDataProduto(rs.getString("dataProduto"));
+//                    c.setMercado(rs.getString("mercado"));
+//                    
+//                    listaProduto.add(c);
+//                }
+//                stmt.close();
+//                rs.close();
+//            } finally {
+//                connection.close();
+//            }
+//        } catch (SQLException e) {
+//            throw e;
+//        }
+//        return listaProduto;
+  
     
     public Produto buscarProduto(Produto produto) throws SQLException {
         try {

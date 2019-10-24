@@ -36,38 +36,22 @@ public class ListaDAO {
 	private Connection connection;
 
 	public void cadastrar(ListaCompras compras) throws SQLException {
-		try {
-			connection = ConnectionFactory.getConnection();
-			try {
-				PreparedStatement stmt = connection.prepareStatement(SQL_INSERIR_LISTA_COMPRAS);
-				stmt.setString(1, compras.getNomeListaCompras());
-				stmt.setString(2, compras.getDataListaCompras());// new Date(Calendar.getInstance().getTimeInMillis()));
-//				stmt.setInt(3, Integer.parseInt(compras.getIdUser()));
-				stmt.execute();
-				stmt.close();
-			} finally {
-				connection.close();
-			}
-		} catch (SQLException ex) {
-			throw ex;
-		}
+		EntityManager manager = JPAEntityManager.getEntityManager();
+		manager.getTransaction().begin();
+		manager.persist(compras);
+		manager.flush();
+		manager.getTransaction().commit();
+		manager.close();
+		
 	}
 
-	public void addProdutoNaLista(ListaCompras compras, Produto produto) throws SQLException {
-		try {
-			connection = ConnectionFactory.getConnection();
-			try {
-				PreparedStatement stmt = connection.prepareStatement(SQL_INSERIR_PRODUTO_LISTA_COMPRAS);
-				stmt.setInt(1, Integer.parseInt(compras.getIdListaCompras()));
-//				stmt.setInt(2, Integer.parseInt(produto.getId()));
-				stmt.execute();
-				stmt.close();
-			} finally {
-				connection.close();
-			}
-		} catch (SQLException ex) {
-			throw ex;
-		}
+	public void addProdutoNaLista(ListaCompras compras) throws SQLException {
+
+		EntityManager manager = JPAEntityManager.getEntityManager();
+		manager.getTransaction().begin();
+		manager.merge(compras);
+		manager.getTransaction().commit();
+		manager.close();
 	}
 
 	public ListaCompras listaProdutos(ListaCompras compras) throws SQLException {
@@ -106,62 +90,80 @@ public class ListaDAO {
 	}
 
 	public void alterarLista(ListaCompras compras) throws SQLException {
-
-		try {
-			connection = ConnectionFactory.getConnection();
-			try {
-				PreparedStatement stmt = connection.prepareStatement(SQL_ALTERAR_COMPRAS);
-				stmt.setString(1, compras.getNomeListaCompras());
-				stmt.setString(2, compras.getDataListaCompras());
-				stmt.setInt(3, Integer.parseInt(compras.getIdListaCompras()));
-				stmt.execute();
-				stmt.close();
-			} finally {
-				connection.close();
-			}
-		} catch (SQLException ex) {
-			throw ex;
-		}
+		
+		EntityManager manager = JPAEntityManager.getEntityManager();
+		manager.getTransaction().begin();
+		manager.merge(compras);
+		manager.getTransaction().commit();
+		manager.close();
+//		try {
+//			connection = ConnectionFactory.getConnection();
+//			try {
+//				PreparedStatement stmt = connection.prepareStatement(SQL_ALTERAR_COMPRAS);
+//				stmt.setString(1, compras.getNomeListaCompras());
+//				stmt.setString(2, compras.getDataListaCompras());
+//				stmt.setInt(3, Integer.parseInt(compras.getIdListaCompras()));
+//				stmt.execute();
+//				stmt.close();
+//			} finally {
+//				connection.close();
+//			}
+//		} catch (SQLException ex) {
+//			throw ex;
+//		}
 	}
 
-	public void excluirProduto(ListaCompras compras, Produto produto) throws SQLException {
-		try {
-			connection = ConnectionFactory.getConnection();
-			try {
-				PreparedStatement stmt = connection.prepareStatement(SQL_EXCLUIR_PRODUTO_NA_LISTA);
-				stmt.setInt(1, Integer.parseInt(compras.getIdListaCompras()));
-//				stmt.setInt(2, Integer.parseInt(produto.getId()));
-				stmt.execute();
-				stmt.close();
-			} finally {
-				connection.close();
-			}
-		} catch (SQLException ex) {
-			throw ex;
-		}
+	public void excluirProduto(Produto produto) throws SQLException {
+		EntityManager manager = JPAEntityManager.getEntityManager();
+		manager.getTransaction().begin();
+		manager.remove(produto);
+		manager.getTransaction().commit();
+		manager.close();
+		
+//		
+//		try {
+//			connection = ConnectionFactory.getConnection();
+//			try {
+//				PreparedStatement stmt = connection.prepareStatement(SQL_EXCLUIR_PRODUTO_NA_LISTA);
+//				stmt.setInt(1, Integer.parseInt(compras.getIdListaCompras()));
+////				stmt.setInt(2, Integer.parseInt(produto.getId()));
+//				stmt.execute();
+//				stmt.close();
+//			} finally {
+//				connection.close();
+//			}
+//		} catch (SQLException ex) {
+//			throw ex;
+//		}
 	}
 
 	public void excluirLista(ListaCompras compras) throws SQLException {
-		try {
-			connection = ConnectionFactory.getConnection();
-			try {
-				PreparedStatement stmt = connection.prepareStatement(SQL_EXCLUIR_TODOS_PRODUTOS_LISTA);
-
-				stmt.setInt(1, Integer.parseInt(compras.getIdListaCompras()));
-				stmt.execute();
-				stmt.close();
-
-				PreparedStatement stmt2 = connection.prepareStatement(SQL_EXCLUIR_LISTA_COMPLETA);
-				stmt2.setInt(1, Integer.parseInt(compras.getIdListaCompras()));
-				stmt2.execute();
-				stmt2.close();
-
-			} finally {
-				connection.close();
-			}
-		} catch (SQLException ex) {
-			throw ex;
-		}
+		EntityManager manager = JPAEntityManager.getEntityManager();
+		manager.getTransaction().begin();
+		manager.remove(compras);
+		manager.getTransaction().commit();
+		manager.close();
+		
+//	try {
+//			connection = ConnectionFactory.getConnection();
+//			try {
+//				PreparedStatement stmt = connection.prepareStatement(SQL_EXCLUIR_TODOS_PRODUTOS_LISTA);
+//
+//				stmt.setInt(1, Integer.parseInt(compras.getIdListaCompras()));
+//				stmt.execute();
+//				stmt.close();
+//
+//				PreparedStatement stmt2 = connection.prepareStatement(SQL_EXCLUIR_LISTA_COMPLETA);
+//				stmt2.setInt(1, Integer.parseInt(compras.getIdListaCompras()));
+//				stmt2.execute();
+//				stmt2.close();
+//
+//			} finally {
+//				connection.close();
+//			}
+//		} catch (SQLException ex) {
+//			throw ex;
+//		}
 	}
 
 	public List<ListaCompras> listar(Usuario usuario) throws SQLException {
@@ -185,65 +187,15 @@ public class ListaDAO {
 		
 		
 		
-//		List<ListaCompras> listasCompras = new ArrayList<ListaCompras>();
-//		
-//		
-//		try {
-//			connection = ConnectionFactory.getConnection();
-//			try {
-//				PreparedStatement stmt = connection.prepareStatement(SQL_LISTAR_COMPRAS);
-//				stmt.setInt(1, Integer.parseInt(usuario.getId()));
-//
-//				ResultSet rs = stmt.executeQuery();
-//				while (rs.next()) {
-//					ListaCompras c = new ListaCompras();
-//
-//					c.setIdListaCompras(String.valueOf(rs.getInt("idCompra")));
-//					c.setDataListaCompras(rs.getString("dataCompras"));
-//					c.setNomeListaCompras(rs.getString("nomeCompras"));
-//					listasCompras.add(c);
-//				}
-//				stmt.close();
-//				rs.close();
-//			} finally {
-//				connection.close();
-//			}
-//		} catch (SQLException e) {
-//			throw e;
-//		}
-//		return listasCompras;
 	}
 
-	public ListaCompras consultar(ListaCompras compras) throws SQLException {
-		try {
-			connection = ConnectionFactory.getConnection();
-			try {
-				PreparedStatement stmt = connection.prepareStatement(SQL_CONSULTAR_LISTA_COMPRAS);
-				stmt.setString(1, compras.getNomeListaCompras());
-				stmt.setString(2, compras.getDataListaCompras());
-//				stmt.setInt(3, Integer.parseInt(compras.getIdUser()));
-
-				ResultSet rs = stmt.executeQuery();
-				if (rs.isBeforeFirst()) {
-					while (rs.next()) {
-						compras.setIdListaCompras(String.valueOf(rs.getInt("id")));
-						compras.setNomeListaCompras(String.valueOf(rs.getString("nome")));
-						compras.setDataListaCompras(String.valueOf(rs.getString("data")));
-
-					}
-				} else {
-					compras = null;
-				}
-
-				stmt.close();
-				rs.close();
-			} finally {
-				connection.close();
-			}
-		} catch (SQLException e) {
-			throw e;
-		}
-		return compras;
+	public ListaCompras consultar(ListaCompras compras) {
+		
+		EntityManager manager = JPAEntityManager.getEntityManager();
+		ListaCompras registro = manager.find(ListaCompras.class, compras);
+		manager.close();
+		
+		return registro;
 	}
 
 }

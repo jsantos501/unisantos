@@ -38,7 +38,7 @@ public class ListaBean  implements Serializable {
     	setCompras(listaCompras);
     	setProduto(new Produto());
     	ProdutoDAO produtoDAO = new ProdutoDAO();
-    	listaCompras.setListaProdutos(produtoDAO.listar(listaCompras));
+    	produtoDAO.listar(listaCompras);
     	
     	SessionContext.getInstance().setAttribute(Constantes.KEY_SESSION_COMPRAS_SELECIONADA, listaCompras);
     	return "/lista_compras";
@@ -79,16 +79,16 @@ public class ListaBean  implements Serializable {
     	ListaDAO listaDAO = new ListaDAO();
     	ProdutoDAO produtoDAO = new  ProdutoDAO();
     	
-    	listaDAO.excluirProduto(compras, produtoSel);
-    	compras.setListaProdutos(produtoDAO.listar(compras));
+    	listaDAO.excluirProduto(produtoSel);
+    	produtoDAO.listar(compras);
     	return "/excluir_lista_1";
 	}    
 
     public String excluirProdutoEmDetalhe(Produto produtoSel) throws SQLException {
     	ListaDAO listaDAO = new ListaDAO();
     	ProdutoDAO produtoDAO = new  ProdutoDAO();
-    	listaDAO.excluirProduto(compras, produtoSel);
-    	compras.setListaProdutos(produtoDAO.listar(compras));
+    	listaDAO.excluirProduto(produtoSel);
+    	produtoDAO.listar(compras);
 
     	return "/lista_compras";
 	}    
@@ -113,10 +113,9 @@ public class ListaBean  implements Serializable {
     	compras.setListaProdutos(new ArrayList<Produto>());
     	compras.setQtdProduto("0");
     	Usuario user = (Usuario) SessionContext.getInstance().getAttribute(Constantes.KEY_SESSION_USUARIO_LOGADO);
-
-//    	compras.setIdUser(user.getId());
+    	compras.setUsuario(user);
+    	
     	listaDAO.cadastrar(compras);
-    	compras = listaDAO.consultar(compras);
     	SessionContext.getInstance().setAttribute(Constantes.KEY_SESSION_COMPRAS_SELECIONADA, compras);
 
     	return "/cadastrar_lista_2";
@@ -124,16 +123,13 @@ public class ListaBean  implements Serializable {
     
     public String addProduto() throws SQLException{
     	ListaDAO listaDAO = new ListaDAO();
-    	ProdutoDAO produtoDAO = new ProdutoDAO();
     	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     	produto.setDataProduto(sdf.format(Calendar.getInstance().getTime()));
     	produto.setPego("0");
     	
-    	produtoDAO.adicionar(produto);
-    	produto = produtoDAO.buscarProduto(produto);
-    	listaDAO.addProdutoNaLista(compras,produto);
-    	compras = listaDAO.listaProdutos(compras);
+    	compras.getListaProdutos().add(produto);
+    	listaDAO.addProdutoNaLista(compras);
     	produto = new Produto();
     	
     	return "/cadastrar_lista_2";
@@ -143,19 +139,13 @@ public class ListaBean  implements Serializable {
     public String addProdutoEmDetalhe() throws SQLException{
     	ListaDAO listaDAO = new ListaDAO();
     	
-    	ProdutoDAO produtoDAO = new ProdutoDAO();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     	produto.setDataProduto(sdf.format(Calendar.getInstance().getTime()));
     	produto.setPego("0");
-    	
-    //	compras = listaDAO.addProduto(compras,produto);
-    	produtoDAO.adicionar(produto);
-    	produto = produtoDAO.buscarProduto(produto);
-    	listaDAO.addProdutoNaLista(compras,produto);
-    	compras = listaDAO.listaProdutos(compras);
-    	
-    	
+
+    	compras.getListaProdutos().add(produto);
+    	listaDAO.addProdutoNaLista(compras);
     	
     	produto = new Produto();
     	
