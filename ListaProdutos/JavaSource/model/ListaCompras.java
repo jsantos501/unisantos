@@ -33,9 +33,7 @@ public class ListaCompras  implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)	
 	private Long id;
-	
-	private String idListaCompras;
-	
+		
 	private String nomeListaCompras;
 	
 	private String dataListaCompras;
@@ -45,17 +43,10 @@ public class ListaCompras  implements Serializable {
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Usuario usuario;
 
-	@OneToMany(cascade=CascadeType.ALL, orphanRemoval=true)
+	@OneToMany(cascade=CascadeType.ALL, orphanRemoval=true, fetch = FetchType.EAGER)
 	@JoinColumn(name = "compra_id")
 	private List<Produto> listaProdutos;
 	
-	
-	public String getIdListaCompras() {
-		return idListaCompras;
-	}
-	public void setIdListaCompras(String idListaCompras) {
-		this.idListaCompras = idListaCompras;
-	}
 	public String getNomeListaCompras() {
 		return nomeListaCompras;
 	}

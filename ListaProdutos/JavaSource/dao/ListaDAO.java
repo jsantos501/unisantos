@@ -46,10 +46,12 @@ public class ListaDAO {
 	}
 
 	public void addProdutoNaLista(ListaCompras compras) throws SQLException {
-
+ 
 		EntityManager manager = JPAEntityManager.getEntityManager();
 		manager.getTransaction().begin();
 		manager.merge(compras);
+
+		manager.flush();
 		manager.getTransaction().commit();
 		manager.close();
 	}
@@ -61,7 +63,7 @@ public class ListaDAO {
 			connection = ConnectionFactory.getConnection();
 			try {
 				PreparedStatement stmt = connection.prepareStatement(SQL_PRODUTOS_LISTA_SELECIONADA);
-				stmt.setInt(1, Integer.parseInt(compras.getIdListaCompras()));
+				stmt.setInt(1, compras.getId().intValue());
 
 				ResultSet rs = stmt.executeQuery();
 				while (rs.next()) {
@@ -113,10 +115,10 @@ public class ListaDAO {
 //		}
 	}
 
-	public void excluirProduto(Produto produto) throws SQLException {
+	public void excluirProduto(ListaCompras compras) throws SQLException {
 		EntityManager manager = JPAEntityManager.getEntityManager();
 		manager.getTransaction().begin();
-		manager.remove(produto);
+		manager.merge(compras);
 		manager.getTransaction().commit();
 		manager.close();
 		
@@ -189,10 +191,10 @@ public class ListaDAO {
 		
 	}
 
-	public ListaCompras consultar(ListaCompras compras) {
+	public ListaCompras consultar(Long idCompras) {
 		
 		EntityManager manager = JPAEntityManager.getEntityManager();
-		ListaCompras registro = manager.find(ListaCompras.class, compras);
+		ListaCompras registro = manager.find(ListaCompras.class, idCompras);
 		manager.close();
 		
 		return registro;

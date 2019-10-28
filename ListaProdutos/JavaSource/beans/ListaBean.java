@@ -37,8 +37,8 @@ public class ListaBean  implements Serializable {
     public String pag_detalhe_lista(ListaCompras listaCompras) throws SQLException {
     	setCompras(listaCompras);
     	setProduto(new Produto());
-    	ProdutoDAO produtoDAO = new ProdutoDAO();
-    	produtoDAO.listar(listaCompras);
+    	//ProdutoDAO produtoDAO = new ProdutoDAO();
+    	//produtoDAO.listar(listaCompras);
     	
     	SessionContext.getInstance().setAttribute(Constantes.KEY_SESSION_COMPRAS_SELECIONADA, listaCompras);
     	return "/lista_compras";
@@ -51,6 +51,7 @@ public class ListaBean  implements Serializable {
     }
     
     public String alterarProduto(Produto produtoSel) throws SQLException {
+    	//TODO fazer a alteração de produto.
     	return "/alterar_lista_1";
 	}    
     
@@ -79,16 +80,18 @@ public class ListaBean  implements Serializable {
     	ListaDAO listaDAO = new ListaDAO();
     	ProdutoDAO produtoDAO = new  ProdutoDAO();
     	
-    	listaDAO.excluirProduto(produtoSel);
+    	//listaDAO.excluirProduto(produtoSel);
     	produtoDAO.listar(compras);
     	return "/excluir_lista_1";
 	}    
 
-    public String excluirProdutoEmDetalhe(Produto produtoSel) throws SQLException {
+    public String excluirProdutoEmDetalhe(int index) throws SQLException {
     	ListaDAO listaDAO = new ListaDAO();
-    	ProdutoDAO produtoDAO = new  ProdutoDAO();
-    	listaDAO.excluirProduto(produtoSel);
-    	produtoDAO.listar(compras);
+    	compras.getListaProdutos().remove(index);
+    	//ProdutoDAO produtoDAO = new  ProdutoDAO();
+    	listaDAO.excluirProduto(compras);
+    	compras = listaDAO.consultar(compras.getId());
+    	//produtoDAO.listar(compras);
 
     	return "/lista_compras";
 	}    
@@ -146,6 +149,8 @@ public class ListaBean  implements Serializable {
 
     	compras.getListaProdutos().add(produto);
     	listaDAO.addProdutoNaLista(compras);
+    	
+    	compras = listaDAO.consultar(compras.getId());
     	
     	produto = new Produto();
     	

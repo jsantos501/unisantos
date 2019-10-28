@@ -14,7 +14,7 @@
 				<h:panelGrid columns="2">
 					<h:outputLabel value="#{msgs.lista_ponto}" for="nomeCompras" />
 					<h:outputLabel
-						value="#{listaBean.compras.idListaCompras}-#{listaBean.compras.nomeListaCompras}" />
+						value="#{listaBean.compras.id}-#{listaBean.compras.nomeListaCompras}" />
 				</h:panelGrid>
 				<h:panelGrid columns="2">
 					<h:outputLabel value="#{msgs.data_ponto}" for="dataCompras" />
@@ -78,7 +78,7 @@
         <h:form>
 
 
-            <h:dataTable id="idDataTableListaProdutos" value="#{listaBean.compras.listaProdutos}" var="lp"          
+            <h:dataTable id="idDataTableListaProdutos" value="#{listaBean.compras.listaProdutos}" var="lp"
                          styleClass="tabela" captionClass="tabelaCaption" 
                          headerClass="tabelaHeader" 
                          rowClasses="linhaPar, linhaImpar">
@@ -116,7 +116,7 @@
                     <h:outputText value="#{lp.mercado}"/>
                 </h:column>
                 <h:column>
-                	<h:commandButton value="#{msgs.ex_lista_excluir}" action="#{listaBean.excluirProdutoEmDetalhe(lp)}">
+                	<h:commandButton value="#{msgs.ex_lista_excluir}" action="#{listaBean.excluirProdutoEmDetalhe(listaBean.compras.listaProdutos.indexOf(lp))}">
                 					<f:ajax render="@form"></f:ajax>
                 	</h:commandButton>
                	</h:column>

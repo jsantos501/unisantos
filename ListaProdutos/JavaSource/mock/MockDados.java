@@ -25,7 +25,7 @@ public class MockDados {
 
 	public static ListaCompras getListaCompras1(){
 		ListaCompras compras = new ListaCompras();
-		compras.setIdListaCompras("1");
+		compras.setId(1L);
 		compras.setNomeListaCompras("Compras do Mes Maio");
 		compras.setDataListaCompras("10/05/2019");
 //		compras.setIdUser("1");
@@ -36,7 +36,7 @@ public class MockDados {
 
 	public static ListaCompras getListaCompras2(){
 		ListaCompras compras = new ListaCompras();
-		compras.setIdListaCompras("2");
+		compras.setId(2L);
 		compras.setNomeListaCompras("Compras do Mes Abril");
 		compras.setDataListaCompras("10/04/2019");
 //		compras.setIdUser("1");
@@ -125,7 +125,7 @@ public class MockDados {
 
 	public static ListaCompras criaNovaLista(ListaCompras lc){
 		Random gerador = new Random();
-		lc.setIdListaCompras(""+ gerador.nextInt(99));
+		lc.setId(gerador.nextLong());
 		listasCompras.add(lc);
 		return lc;
 	}
@@ -135,7 +135,7 @@ public class MockDados {
 		Random gerador = new Random();
 //		produto.setId(""+ gerador.nextInt(99));
 		for(ListaCompras l:listasCompras) {
-			if(compras.getIdListaCompras().equals(l.getIdListaCompras())) {
+			if(compras.getId().equals(l.getId())) {
 				l.getListaProdutos().add(produto);
 				return l;
 			}
@@ -146,7 +146,7 @@ public class MockDados {
 	public static ListaCompras attCompra(ListaCompras compras){
 
 		for(ListaCompras l:listasCompras) {
-			if(compras.getIdListaCompras().equals(l.getIdListaCompras())) {
+			if(compras.getId() == l.getId()) {
 				l.setDataListaCompras(compras.getDataListaCompras());
 				l.setNomeListaCompras(compras.getNomeListaCompras());
 				return l;
@@ -157,7 +157,7 @@ public class MockDados {
 	
 	public static ListaCompras attProdutoNaLista(ListaCompras compras, Produto produto){
 		for(ListaCompras l:listasCompras) {
-			if(compras.getIdListaCompras().equals(l.getIdListaCompras())) {
+			if(compras.getId().equals(l.getId())) {
 				for(Produto p:l.getListaProdutos()) {
 					if(p.getId().equals(produto.getId())) {
 						p.setDataProduto(produto.getDataProduto());
@@ -178,7 +178,7 @@ public class MockDados {
 	public static ListaCompras removeCompra(ListaCompras compras){
 
 		for(ListaCompras l:listasCompras) {
-			if(compras.getIdListaCompras().equals(l.getIdListaCompras())) {
+			if(compras.getId().equals(l.getId())) {
 				listasCompras.remove(l);
 				return null;
 			}
@@ -188,7 +188,7 @@ public class MockDados {
 	
 	public static ListaCompras removeProdutoNaLista(ListaCompras compras, Produto produto){
 		for(ListaCompras l:listasCompras) {
-			if(compras.getIdListaCompras().equals(l.getIdListaCompras())) {
+			if(compras.getId().equals(l.getId())) {
 				for(Produto p:l.getListaProdutos()) {
 					if(p.getId().equals(produto.getId())) {
 						l.getListaProdutos().remove(p);
