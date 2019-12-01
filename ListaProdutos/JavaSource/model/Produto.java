@@ -8,12 +8,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/**
+*
+* @author ALEXANDRE JOSE DOS SANTOS
+*/
 @Entity
 @Dependent
 public class Produto  implements Serializable {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -7810451511090909294L;
 	
 	@Id

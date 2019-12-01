@@ -12,6 +12,10 @@ import constantes.Constantes;
 import model.ListaCompras;
 import model.Usuario;
 
+/**
+*
+* @author ALEXANDRE JOSE DOS SANTOS
+*/
 public class ListaDAO {
 
 	public void cadastrar(ListaCompras compras) throws SQLException {

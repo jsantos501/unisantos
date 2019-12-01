@@ -1,5 +1,9 @@
 package constantes;
 
+/**
+*
+* @author ALEXANDRE JOSE DOS SANTOS
+*/
 public class Constantes {
 	public final static String KEY_SESSION_USUARIO_LOGADO = "_KEY_SESSION_USUARIO_LOGADO_";
 	public final static String KEY_SESSION_LISTAS_COMPRAS = "_KEY_SESSION_LISTAS_COMPRAS_";

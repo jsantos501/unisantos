@@ -17,6 +17,10 @@ import model.Produto;
 import model.Usuario;
 import session.SessionContext;
 
+/**
+*
+* @author ALEXANDRE JOSE DOS SANTOS
+*/
 @Named(value = "listaBean")
 @SessionScoped
 public class ListaBean  implements Serializable {
@@ -40,7 +44,12 @@ public class ListaBean  implements Serializable {
     }
     
     public String alterarProduto(Produto produtoSel) throws SQLException {
-    	//TODO fazer a alteração de produto.
+     	ListaDAO listaDAO = new ListaDAO();
+    	Usuario user = (Usuario) SessionContext.getInstance().getAttribute(Constantes.KEY_SESSION_USUARIO_LOGADO);
+     	listaDAO.alterarLista(compras);
+     	
+        List<ListaCompras> listasCompras = listaDAO.listar(user);
+    	SessionContext.getInstance().setAttribute(Constantes.KEY_SESSION_LISTAS_COMPRAS, listasCompras);
     	return "/alterar_lista_1";
 	}    
     

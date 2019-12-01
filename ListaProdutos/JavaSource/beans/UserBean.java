@@ -26,6 +26,10 @@ import model.ListaCompras;
 import model.Usuario;
 import session.SessionContext;
 
+/**
+*
+* @author ALEXANDRE JOSE DOS SANTOS
+*/
 @Named(value = "userBean")
 @SessionScoped
 public class UserBean implements Serializable {
@@ -77,7 +81,8 @@ public class UserBean implements Serializable {
 			return "/home";
 		}
 		FacesContext.getCurrentInstance().addMessage("form:submit",
-				new FacesMessage("Erro: login ou senha inválidos!", "Digite novamente"));
+				new FacesMessage(
+						getMessage("erro_login_senha_invalidos"), getMessage("erro_digite_novamente")));
 		return null;
 	}
 

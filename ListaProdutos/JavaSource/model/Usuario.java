@@ -12,6 +12,10 @@ import javax.persistence.NamedQuery;
 
 import constantes.Constantes;
 
+/**
+*
+* @author ALEXANDRE JOSE DOS SANTOS
+*/
 @Entity
 @Dependent
 @NamedQueries({
@@ -22,9 +26,7 @@ import constantes.Constantes;
 
 	})
 public class Usuario implements Serializable {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1086125588626003704L;
 	
 	@Id

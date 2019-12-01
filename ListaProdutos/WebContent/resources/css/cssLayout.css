@@ -3,10 +3,20 @@
     position: relative;
     background-color: #dddddd;
     color: #dddddd;
-    boder: 0px solid #dddddd;
+    boder: none;
     padding: 5px;
     margin: 0px 0px 10px 0px;
+
 }
+
+.panelGridHeaderTop.ui-panelgrid>*>tr,
+.panelGridHeaderTop.ui-panelgrid .ui-panelgrid-cell {
+    border: none;
+    background-color: #dddddd;    
+}
+
+.panelGridHeaderTopColunaDireita{ text-align: left; } 
+.panelGridHeaderTopColunaEsquerda{ text-align: right; }
 
 #bottom {
     position: relative;

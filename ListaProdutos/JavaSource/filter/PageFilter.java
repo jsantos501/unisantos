@@ -15,6 +15,10 @@ import javax.servlet.http.HttpSession;
 import constantes.Constantes;
 import model.Usuario;
 
+/**
+*
+* @author ALEXANDRE JOSE DOS SANTOS
+*/
 public class PageFilter implements Filter {
 
 	public void destroy() {

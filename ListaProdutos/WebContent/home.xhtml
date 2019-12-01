@@ -21,11 +21,11 @@
                 </prime:column>
               	<prime:column>
                     <f:facet name="header">#{msgs.alterar}</f:facet>
-                <h:commandLink value="alterar" action="#{listaBean.pag_alterar_1(lc)}"/>
+                <h:commandLink value="#{msgs.alterar}" action="#{listaBean.pag_alterar_1(lc)}"/>
                 </prime:column>
                 <prime:column>
                     <f:facet name="header">#{msgs.excluir}</f:facet>
-                <h:commandLink value="excluir" action="#{listaBean.pag_excluir_1(lc)}"/>
+                <h:commandLink value="#{msgs.excluir}" action="#{listaBean.pag_excluir_1(lc)}"/>
                 </prime:column>
               </prime:dataTable>
         <h:commandButton value="#{msgs.nova_nome_lista_compra}" action="#{listaBean.pag_cadastro_lista}"/>

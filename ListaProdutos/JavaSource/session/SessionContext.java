@@ -11,6 +11,11 @@ import javax.servlet.http.HttpSession;
 
 import constantes.Constantes;
 
+/**
+*
+* @author ALEXANDRE JOSE DOS SANTOS
+*/
+
 public class SessionContext {
 	private static SessionContext instance = null;
 

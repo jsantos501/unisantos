@@ -21,9 +21,14 @@
 		<div id="top" class="top">
 			<ui:insert name="top">
 			
-			<prime:panelGrid columns="2" style="width:100%; border: 0px solid #dddddd;">
-			<h2>#{msgs.lista_compras}</h2>
-				<div style="align-content: right">
+			<prime:panelGrid columns="2" 
+				styleClass="panelGridHeaderTop" 
+				columnClasses="panelGridHeaderTopColunaDireita, panelGridHeaderTopColunaEsquerda"  
+				style="width:100%;">
+
+				<h2>#{msgs.lista_compras}</h2>
+
+				<div>
 					<h:form id="internacionalizacaoForm">
 						<prime:commandButton value="#{msgs.portugues}"
 							action="#{userBean.portugueseLocale}" ajax="false"
@@ -32,6 +37,7 @@
 							ajax="false" style="font-size: 20px;" />
 					</h:form>
 				</div>
+
 			</prime:panelGrid>
 			</ui:insert>
 		</div>

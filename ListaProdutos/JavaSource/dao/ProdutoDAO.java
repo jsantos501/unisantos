@@ -7,6 +7,11 @@ import javax.persistence.EntityManager;
 import connection.JPAEntityManager;
 import model.ListaCompras;
 
+/**
+*
+* @author ALEXANDRE JOSE DOS SANTOS
+*/
+
 public class ProdutoDAO {
 
     public void listar(ListaCompras compras) throws SQLException {
@@ -15,7 +20,5 @@ public class ProdutoDAO {
 		compras = manager.find(ListaCompras.class, compras);
 		manager.close();
 	}
-  
-    
 	
 }

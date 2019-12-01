@@ -18,6 +18,10 @@ import javax.persistence.OneToMany;
 
 import constantes.Constantes;
 
+/**
+*
+* @author ALEXANDRE JOSE DOS SANTOS
+*/
 @Entity
 @Dependent
 @NamedQueries({

@@ -11,7 +11,10 @@ import constantes.Constantes;
 import model.ListaCompras;
 import model.Usuario;
 
-
+/**
+*
+* @author ALEXANDRE JOSE DOS SANTOS
+*/
 public class UsuarioDAO {
 
     public List<Usuario> listar() throws SQLException {
@@ -51,8 +54,6 @@ public class UsuarioDAO {
 		return u;
     	
     }
-    
-
    
     public void addUsuario(Usuario usuario) throws SQLException {
 		EntityManager manager = JPAEntityManager.getEntityManager();
@@ -85,7 +86,6 @@ public class UsuarioDAO {
 			manager.close();
 		}
     }
-    
     
     public void alterarUsuario(Usuario usuario) throws SQLException {
 		EntityManager manager = JPAEntityManager.getEntityManager();
