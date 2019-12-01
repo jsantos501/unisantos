@@ -1,39 +1,44 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 
+
 <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	template="./_template.xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	template="./_template.xhtml" 
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:prime="http://primefaces.org/ui"
-	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:prime="http://primefaces.org/ui">
+
+	<h:outputStylesheet library="css" name="default.css" />
+	<h:outputStylesheet library="css" name="cssLayout.css" />
 
 	<ui:define name="left">
 		<div class="altura_maxima"></div>
 	</ui:define>
 	<ui:define name="content">
 		<h:form id="form">
-			<h:outputText value="#{msgs.obrigatorio_login_page}"
+			<prime:outputLabel value="#{msgs.obrigatorio_login_page}"
 				styleClass="erro"
 				rendered="#{not empty session.getAttribute('message')}" />
-			<h:panelGrid columns="3">
-				<h:outputLabel value="#{msgs.login}:" for="login" />
-				<h:inputText id="login" value="#{userBean.user.login}"
+			<prime:panelGrid columns="3">
+				<prime:outputLabel value="#{msgs.login}:" for="login" />
+				<prime:inputText id="login" value="#{userBean.user.login}"
 					required="true" requiredMessage="#{msgs.login_erro}" validatorMessage="#{msgs.login_validator}">
 					<f:validateLength minimum="1" maximum="10"/>
-					</h:inputText>
-				<h:message for="login" styleClass="erro" />
+					</prime:inputText>
+				<prime:message for="login" styleClass="erro" />
 
-				<h:outputLabel value="#{msgs.senha}: " for="password" />
+				<prime:outputLabel value="#{msgs.senha}: " for="password" />
 				<h:inputSecret id="password" redisplay="false"
 					value="#{userBean.user.senha}" required="true"
 					requiredMessage="#{msgs.senha_erro}" validatorMessage="#{msgs.senha_validator}">
 					<f:validateLength minimum="1" maximum="10"/>
 					</h:inputSecret>
-				<h:message for="password" styleClass="erro" />
+				<prime:message for="password" styleClass="erro" />
 
-			</h:panelGrid>
+			</prime:panelGrid>
 			<h:commandButton value="#{msgs.entrar}" action="#{userBean.validar}"
 				id="submit" />
-			<h:message for="submit" styleClass="erro" showDetail="true"
+			<prime:message for="submit" styleClass="erro" showDetail="true"
 				showSummary="true" />
 		</h:form>
 	</ui:define>

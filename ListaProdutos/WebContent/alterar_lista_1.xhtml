@@ -4,74 +4,75 @@
                 template="./_template.xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
-                xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+                xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:prime="http://primefaces.org/ui">
 
 
     <ui:define name="content">
         <h:form>
-           <h:panelGrid columns="3">
-                <h:outputLabel value="#{msgs.alter_lista_id}" />
-                <h:outputLabel value="#{listaBean.compras.id}" id="idCompras" />
-                <h:message for="idCompras" styleClass="erro" />
+           <prime:panelGrid columns="3">
+                <prime:outputLabel value="#{msgs.alter_lista_id}" />
+                <prime:outputLabel value="#{listaBean.compras.id}" id="idCompras" />
+                <prime:message for="idCompras" styleClass="erro" />
                 
-                <h:outputLabel value="#{msgs.alter_lista_nome_lista}" for="nomeCompras"/>
-                <h:inputText value="#{listaBean.compras.nomeListaCompras}" id="nomeCompras" label="nomeCompras" 
+                <prime:outputLabel value="#{msgs.alter_lista_nome_lista}" for="nomeCompras"/>
+                <prime:inputText value="#{listaBean.compras.nomeListaCompras}" id="nomeCompras" label="nomeCompras" 
                 required="true" requiredMessage="#{msgs.erro_alter_lista_nome}"/>
-                <h:message for="nomeCompras" styleClass="erro" />
+                <prime:message for="nomeCompras" styleClass="erro" />
                 
-                <h:outputLabel value="#{msgs.alter_lista_data_compras}" for="dataCompras" />
-                <h:inputText value="#{listaBean.compras.dataListaCompras}" id="dataCompras" label="dataCompras" 
+                <prime:outputLabel value="#{msgs.alter_lista_data_compras}" for="dataCompras" />
+                <prime:inputText value="#{listaBean.compras.dataListaCompras}" id="dataCompras" label="dataCompras" 
                 required="true" requiredMessage="#{msgs.erro_alter_lista_data}"/>
-                <h:message for="dataCompras" styleClass="erro" />
+                <prime:message for="dataCompras" styleClass="erro" />
 
-            </h:panelGrid>
+            </prime:panelGrid>
 
 			<h:commandButton value="#{msgs.alter_lista_alterar_cabecalho}" action="#{listaBean.alterarCompra()}"/>
 
-            <h:dataTable value="#{listaBean.compras.listaProdutos}" var="lp"          
+            <prime:dataTable value="#{listaBean.compras.listaProdutos}" var="lp"          
                          styleClass="tabela" captionClass="tabelaCaption" 
                          headerClass="tabelaHeader" 
                          rowClasses="linhaPar, linhaImpar">
                 <f:facet name="caption">#{msgs.alter_lista_lista_produtos}</f:facet>
-                <h:column>
+                <prime:column>
                     <f:facet name="header">#{msgs.alter_lista_table_id}</f:facet>
-                    <h:outputLabel value="#{lp.id}" />
-                </h:column>
-                <h:column>
+                    <prime:outputLabel value="#{lp.id}" />
+                </prime:column>
+                <prime:column>
                     <f:facet name="header">#{msgs.alter_lista_table_nome}</f:facet>
-                    <h:inputText value="#{lp.nome}" id="nome"/>
-                </h:column>
-                <h:column>
+                    <prime:inputText value="#{lp.nome}" id="nome"/>
+                </prime:column>
+                <prime:column>
                     <f:facet name="header">#{msgs.alter_lista_table_marca}</f:facet>
-                    <h:inputText value="#{lp.marca}" id="marca"/>
-                </h:column>
-                <h:column>
+                    <prime:inputText value="#{lp.marca}" id="marca"/>
+                </prime:column>
+                <prime:column>
                     <f:facet name="header">#{msgs.alter_lista_table_quantidade}</f:facet>
-                    <h:inputText value="#{lp.quantidade}" id="quantidade"/>
-                </h:column>
-                <h:column>
+                    <prime:inputText value="#{lp.quantidade}" id="quantidade"/>
+                </prime:column>
+                <prime:column>
                     <f:facet name="header">#{msgs.alter_lista_table_descricao}</f:facet>
-                    <h:inputText value="#{lp.descricao}" id="descricao"/>
-                </h:column>
-                <h:column>
+                    <prime:inputText value="#{lp.descricao}" id="descricao"/>
+                </prime:column>
+                <prime:column>
                     <f:facet name="header">#{msgs.alter_lista_table_valor}</f:facet>
-                    <h:inputText value="#{lp.valorProduto}" id="valor"/>
-                </h:column>
-                <h:column>
+                    <prime:inputText value="#{lp.valorProduto}" id="valor"/>
+                </prime:column>
+                <prime:column>
                     <f:facet name="header">#{msgs.alter_lista_table_data}</f:facet>
-                    <h:inputText value="#{lp.dataProduto}" id="data"/>
-                </h:column>
-                <h:column>
+                    <prime:inputText value="#{lp.dataProduto}" id="data"/>
+                </prime:column>
+                <prime:column>
                     <f:facet name="header">#{msgs.alter_lista_table_mercado}</f:facet>
-                    <h:inputText value="#{lp.mercado}" id="mercado"/>
-                </h:column>
+                    <prime:inputText value="#{lp.mercado}" id="mercado"/>
+                </prime:column>
                 
-                <h:column>
+                <prime:column>
                     <f:facet name="header"> </f:facet>
                 	<h:commandButton value="#{msgs.alter_lista_botao_alterar}" action="#{listaBean.alterarProduto(lp)}"/>
-                </h:column>
+                </prime:column>
                 
-            </h:dataTable>
+            </prime:dataTable>
 
 
        </h:form>

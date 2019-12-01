@@ -4,29 +4,30 @@
                 template="./_template.xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
-                xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+                xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:prime="http://primefaces.org/ui">
 
     <ui:define name="content">
         <h:form id="form">
-             <h:dataTable value="#{userBean.listasCompras}" var="lc"          
+             <prime:dataTable value="#{userBean.listasCompras}" var="lc"          
                          styleClass="tabela" captionClass="tabelaCaption" 
                          headerClass="tabelaHeader" 
                          rowClasses="linhaPar, linhaImpar">
                 <f:facet name="caption">#{msgs.lista_compras}</f:facet>
-                <h:column>
+                <prime:column>
                     <f:facet name="header">#{msgs.nome}</f:facet>
                 <h:commandLink value="#{lc.id} - #{lc.nomeListaCompras}" action="#{listaBean.pag_detalhe_lista(lc)}"/>
                 
-                </h:column>
-              	<h:column>
+                </prime:column>
+              	<prime:column>
                     <f:facet name="header">#{msgs.alterar}</f:facet>
                 <h:commandLink value="alterar" action="#{listaBean.pag_alterar_1(lc)}"/>
-                </h:column>
-                <h:column>
+                </prime:column>
+                <prime:column>
                     <f:facet name="header">#{msgs.excluir}</f:facet>
                 <h:commandLink value="excluir" action="#{listaBean.pag_excluir_1(lc)}"/>
-                </h:column>
-              </h:dataTable>
+                </prime:column>
+              </prime:dataTable>
         <h:commandButton value="#{msgs.nova_nome_lista_compra}" action="#{listaBean.pag_cadastro_lista}"/>
  
         </h:form>

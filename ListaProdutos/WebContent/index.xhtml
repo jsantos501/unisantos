@@ -3,7 +3,8 @@
 <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 template="./_template.xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
-                xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+                xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:prime="http://primefaces.org/ui">
 
     <ui:define name="top">
         Novo contato
@@ -11,16 +12,16 @@
 
     <ui:define name="content">
         <h:form>
-            <h:panelGrid columns="3">
-                <h:outputLabel value="Nome:" for="nome"/>
-                <h:inputText value="#{contatoBean.contato.nome}" id="nome" label="Nome" required="true"/>
-                <h:message for="nome" styleClass="erro" />
-                <h:outputLabel value="E-mail:" for="email"/>
-                <h:inputText value="#{contatoBean.contato.email}" id="email" label="E-mail" required="true" p:type="email"/>
-                <h:message for="email" styleClass="erro" />
-                <h:outputLabel value="Endereço:" for="endereco" />
-                <h:inputText value="#{contatoBean.contato.endereco}" id="endereco" label="Endereço"/>
-            </h:panelGrid>
+            <prime:panelGrid columns="3">
+                <prime:outputLabel value="Nome:" for="nome"/>
+                <prime:inputText value="#{contatoBean.contato.nome}" id="nome" label="Nome" required="true"/>
+                <prime:message for="nome" styleClass="erro" />
+                <prime:outputLabel value="E-mail:" for="email"/>
+                <prime:inputText value="#{contatoBean.contato.email}" id="email" label="E-mail" required="true" p:type="email"/>
+                <prime:message for="email" styleClass="erro" />
+                <prime:outputLabel value="Endereço:" for="endereco" />
+                <prime:inputText value="#{contatoBean.contato.endereco}" id="endereco" label="Endereço"/>
+            </prime:panelGrid>
             <h:commandButton value="Cadastrar" action="#{contatoBean.novoContato()}"/>
         </h:form>
     </ui:define>

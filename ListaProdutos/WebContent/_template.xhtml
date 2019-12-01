@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:h="http://xmlns.jcp.org/jsf/html">
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:prime="http://primefaces.org/ui">
 
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -20,32 +21,32 @@
 		<div id="top" class="top">
 			<ui:insert name="top">
 			
-			<h:panelGrid columns="2" style="width:100%">
+			<prime:panelGrid columns="2" style="width:100%; border: 0px solid #dddddd;">
 			<h2>#{msgs.lista_compras}</h2>
 				<div style="align-content: right">
 					<h:form id="internacionalizacaoForm">
-						<h:commandButton value="#{msgs.portugues}"
+						<prime:commandButton value="#{msgs.portugues}"
 							action="#{userBean.portugueseLocale}" ajax="false"
 							style="font-size: 20px;" />
-						<h:commandButton value="#{msgs.ingles}" action="#{userBean.englishLocale}"
+						<prime:commandButton value="#{msgs.ingles}" action="#{userBean.englishLocale}"
 							ajax="false" style="font-size: 20px;" />
 					</h:form>
 				</div>
-			</h:panelGrid>
+			</prime:panelGrid>
 			</ui:insert>
 		</div>
 		<div>
 			<div id="left">
 				<ui:insert name="left">
 					<h:form>
-						<h:panelGrid>
+						<prime:panelGrid columns="1" style="width:100%">
 							<h:commandLink value="#{msgs.home}" action="#{userBean.pag_home}" />
 							<h:commandLink value="#{msgs.criar_lista}"
 								action="#{listaBean.pag_cadastro_lista}" />
 							<h:commandLink value="#{msgs.usuarios}"
 								action="#{userBean.listarUsuario}" />
 							<h:commandLink value="#{msgs.sair}" action="#{userBean.sairSistema}" />
-						</h:panelGrid>
+						</prime:panelGrid>
 					</h:form>
 				</ui:insert>
 			</div>

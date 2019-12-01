@@ -4,59 +4,60 @@
                 template="./_template.xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
-                xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+                xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:prime="http://primefaces.org/ui">
 
     <ui:define name="content">
         <h:form id="form">
         
-			<h:outputLabel value="#{msgs.lista_user_adicionar_novo_usuario}"/>
+			<h1><prime:outputLabel value="#{msgs.lista_user_adicionar_novo_usuario}"/></h1>
 			
-			<h:panelGrid columns="3">
-				<h:outputLabel value="#{msgs.alter_user_login}" for="login" />
-				<h:inputText value="#{userBean.usuario.login}"
+			<prime:panelGrid columns="3">
+				<prime:outputLabel value="#{msgs.alter_user_login}" for="login" />
+				<prime:inputText value="#{userBean.usuario.login}"
 					id="login" label="login" required="true" requiredMessage="#{msgs.erro_alter_user_login}" validatorMessage="#{msgs.validator_}" >
 						<f:validateLength minimum="1" maximum="20"/>
-					</h:inputText>
-				<h:message for="login" styleClass="erro" />
+					</prime:inputText>
+				<prime:message for="login" styleClass="erro" />
 
-				<h:outputLabel value="#{msgs.alter_user_perfil}" for="perfil" />
-				<h:inputText value="#{userBean.usuario.perfil}"
+				<prime:outputLabel value="#{msgs.alter_user_perfil}" for="perfil" />
+				<prime:inputText value="#{userBean.usuario.perfil}"
 					id="perfil" label="perfil" required="true" requiredMessage="#{msgs.erro_alter_user_perfil}"/>
-				<h:message for="perfil" styleClass="erro" />
+				<prime:message for="perfil" styleClass="erro" />
 
-				<h:outputLabel value="#{msgs.alter_user_senha}" for="senha" />
+				<prime:outputLabel value="#{msgs.alter_user_senha}" for="senha" />
 				<h:inputSecret value="#{userBean.usuario.senha}"
 					id="senha" label="senha" required="true" requiredMessage="#{msgs.erro_alter_user_senha}"/>
-				<h:message for="senha" styleClass="erro" />
+				<prime:message for="senha" styleClass="erro" />
 
-				<h:outputLabel value="#{msgs.alter_user_nome}" for="nome" />
-				<h:inputText value="#{userBean.usuario.nome}"
+				<prime:outputLabel value="#{msgs.alter_user_nome}" for="nome" />
+				<prime:inputText value="#{userBean.usuario.nome}"
 					id="nome" label="nome" required="true" requiredMessage="#{msgs.erro_alter_user_nome}"/>
-				<h:message for="nome" styleClass="erro" />
+				<prime:message for="nome" styleClass="erro" />
 
 
-				<h:outputLabel value="#{msgs.alter_user_cpf}" for="cpf" />
-				<h:inputText value="#{userBean.usuario.cpf}"
+				<prime:outputLabel value="#{msgs.alter_user_cpf}" for="cpf" />
+				<prime:inputText value="#{userBean.usuario.cpf}"
 					id="cpf" label="cpf" required="true" requiredMessage="#{msgs.erro_alter_user_cpf}" />
-				<h:message for="cpf" styleClass="erro" />
+				<prime:message for="cpf" styleClass="erro" />
 
-				<h:outputLabel value="#{msgs.alter_user_email}" for="email" />
-				<h:inputText value="#{userBean.usuario.email}"
+				<prime:outputLabel value="#{msgs.alter_user_email}" for="email" />
+				<prime:inputText value="#{userBean.usuario.email}"
 					id="email" label="email" required="true"  requiredMessage="#{msgs.erro_alter_user_email}"/>
-				<h:message for="email" styleClass="erro" />
+				<prime:message for="email" styleClass="erro" />
 
-				<h:outputLabel value="#{msgs.alter_user_cep}" for="cep" />
-				<h:inputText value="#{userBean.usuario.cep}"
+				<prime:outputLabel value="#{msgs.alter_user_cep}" for="cep" />
+				<prime:inputText value="#{userBean.usuario.cep}"
 					id="cep" label="cep" required="true" requiredMessage="#{msgs.erro_alter_user_cep}"/>
-				<h:message for="cep" styleClass="erro" />
+				<prime:message for="cep" styleClass="erro" />
 
-				<h:outputLabel value="#{msgs.alter_user_celular}" for="celular" />
-				<h:inputText value="#{userBean.usuario.celular}"
+				<prime:outputLabel value="#{msgs.alter_user_celular}" for="celular" />
+				<prime:inputText value="#{userBean.usuario.celular}"
 					id="celular" label="celular" required="true" requiredMessage="#{msgs.erro_alter_user_celular}" />
-				<h:message for="celular" styleClass="erro" />
+				<prime:message for="celular" styleClass="erro" />
 
 
-			</h:panelGrid>
+			</prime:panelGrid>
 
 			<h:commandButton value="#{msgs.acicionar_usuario_lista}"
 				action="#{userBean.addUsuario()}" />
@@ -65,52 +66,52 @@
         <h:form>
 
 
-            <h:dataTable value="#{userBean.listaUsuarios}" var="u"          
+            <prime:dataTable value="#{userBean.listaUsuarios}" var="u"          
                          styleClass="tabela" captionClass="tabelaCaption" 
                          headerClass="tabelaHeader" 
                          rowClasses="linhaPar, linhaImpar">
                 <f:facet name="caption">#{msgs.lista_user_adicionar_novo_usuario}</f:facet>
 
-                <h:column>
+                <prime:column>
                     <f:facet name="header">#{msgs.lista_user_nome}</f:facet>
-                    <h:outputText value="#{u.id}-#{u.nome}"/>
-                </h:column>
-                <h:column>
+                    <prime:outputLabel value="#{u.id}-#{u.nome}"/>
+                </prime:column>
+                <prime:column>
                     <f:facet name="header">#{msgs.lista_user_login}</f:facet>
-                    <h:outputText value="#{u.login}"/>
-                </h:column>
-                <h:column>
+                    <prime:outputLabel value="#{u.login}"/>
+                </prime:column>
+                <prime:column>
                     <f:facet name="header">#{msgs.lista_user_perfil}</f:facet>
-                    <h:outputText value="#{u.perfil}"/>
-                </h:column>
-                <h:column>
+                    <prime:outputLabel value="#{u.perfil}"/>
+                </prime:column>
+                <prime:column>
                     <f:facet name="header">#{msgs.lista_user_cpf}</f:facet>
-                    <h:outputText value="#{u.cpf}"/>
-                </h:column>
-                <h:column>
+                    <prime:outputLabel value="#{u.cpf}"/>
+                </prime:column>
+                <prime:column>
                     <f:facet name="header">#{msgs.lista_user_email}</f:facet>
-                    <h:outputText value="#{u.email}"/>
-                </h:column>
-                <h:column>
+                    <prime:outputLabel value="#{u.email}"/>
+                </prime:column>
+                <prime:column>
                     <f:facet name="header">#{msgs.lista_user_cep}</f:facet>
-                    <h:outputText value="#{u.cep}"/>
-                </h:column>
-                <h:column>
+                    <prime:outputLabel value="#{u.cep}"/>
+                </prime:column>
+                <prime:column>
                     <f:facet name="header">#{msgs.lista_user_celular}</f:facet>
-                    <h:outputText value="#{u.celular}"/>
-                </h:column>
+                    <prime:outputLabel value="#{u.celular}"/>
+                </prime:column>
 
-                <h:column>
+                <prime:column>
                 	<h:commandButton value="#{msgs.lista_user_alterar}" action="#{userBean.alterarUsuarioSel(u)}"/>
-               	</h:column>
+               	</prime:column>
 
-                <h:column>
+                <prime:column>
                 	<h:commandButton value="#{msgs.lista_user_excluir}" action="#{userBean.excluirUsuarioSel(u)}">
                 		<f:ajax render="@form"></f:ajax>
                 	</h:commandButton>
-               	</h:column>
+               	</prime:column>
                
-            </h:dataTable>
+            </prime:dataTable>
 
        </h:form>
     </ui:define>

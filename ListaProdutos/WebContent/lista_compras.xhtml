@@ -4,71 +4,72 @@
                 template="./_template.xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
-                xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+                xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:prime="http://primefaces.org/ui">
 
  
     <ui:define name="content">
         <h:form>
         
-			<h:panelGrid columns="2" styleClass="tabela" border="1">
-				<h:panelGrid columns="2">
-					<h:outputLabel value="#{msgs.lista_ponto}" for="nomeCompras" />
-					<h:outputLabel
+			<prime:panelGrid columns="2" styleClass="tabela" border="1">
+				<prime:panelGrid columns="2">
+					<prime:outputLabel value="#{msgs.lista_ponto}" for="nomeCompras" />
+					<prime:outputLabel id="nomeCompras"
 						value="#{listaBean.compras.id}-#{listaBean.compras.nomeListaCompras}" />
-				</h:panelGrid>
-				<h:panelGrid columns="2">
-					<h:outputLabel value="#{msgs.data_ponto}" for="dataCompras" />
-					<h:outputLabel value="#{listaBean.compras.dataListaCompras}" />
-				</h:panelGrid>
-			</h:panelGrid>
+				</prime:panelGrid>
+				<prime:panelGrid columns="2">
+					<prime:outputLabel value="#{msgs.data_ponto}" for="dataCompras" />
+					<prime:outputLabel id="dataCompras" value="#{listaBean.compras.dataListaCompras}" />
+				</prime:panelGrid>
+			</prime:panelGrid>
 
 		
-			<h1><h:outputLabel value="#{msgs.lista_produto_adicionar_novo_produto}"/></h1>
+			<h1><prime:outputLabel value="#{msgs.lista_produto_adicionar_novo_produto}"/></h1>
 			
-			<h:panelGrid columns="3" id="idPanelGridAddProduto">
-				<h:outputLabel value="#{msgs.nome_produto_ponto}" for="produto" />
-				<h:inputText value="#{listaBean.produto.nome}"
+			<prime:panelGrid columns="3" id="idPanelGridAddProduto">
+				<prime:outputLabel value="#{msgs.nome_produto_ponto}" for="produto" />
+				<prime:inputText value="#{listaBean.produto.nome}"
 					id="produto" label="produto" required="true" requiredMessage="nome do produto é obrigatório"  validatorMessage="#{msgs.validator_cadastro_nome_produto_ponto}" >
 						<f:validateLength minimum="1" maximum="20"/>
-					</h:inputText>
-				<h:message for="produto" styleClass="erro" />
+					</prime:inputText>
+				<prime:message for="produto" styleClass="erro" />
 
-				<h:outputLabel value="#{msgs.marca_ponto}" for="marca" />
-				<h:inputText value="#{listaBean.produto.marca}"
+				<prime:outputLabel value="#{msgs.marca_ponto}" for="marca" />
+				<prime:inputText value="#{listaBean.produto.marca}"
 					id="marca" label="marca" required="true"  validatorMessage="#{msgs.validator_cadastro_marca_ponto}" >
 						<f:validateLength minimum="1" maximum="20"/>
-					</h:inputText>
-				<h:message for="marca" styleClass="erro" />
+					</prime:inputText>
+				<prime:message for="marca" styleClass="erro" />
 
-				<h:outputLabel value="#{msgs.descricao_produto_ponto}" for="descricao" />
-				<h:inputText value="#{listaBean.produto.descricao}"
+				<prime:outputLabel value="#{msgs.descricao_produto_ponto}" for="descricao" />
+				<prime:inputText value="#{listaBean.produto.descricao}"
 					id="descricao" label="descricao" required="true" validatorMessage="#{msgs.validator_cadastro_descricao_produto_ponto}" >
 						<f:validateLength minimum="1" maximum="20"/>
-					</h:inputText>
-				<h:message for="descricao" styleClass="erro" />
+					</prime:inputText>
+				<prime:message for="descricao" styleClass="erro" />
 
 
-				<h:outputLabel value="#{msgs.preco_ponto}" for="valorProduto" />
-				<h:inputText value="#{listaBean.produto.valorProduto}"
+				<prime:outputLabel value="#{msgs.preco_ponto}" for="valorProduto" />
+				<prime:inputText value="#{listaBean.produto.valorProduto}"
 					id="valorProduto" label="preço do produto" required="true" converterMessage="#{msgs.convert_cadastro_valor_erro}" >
 					<f:convertNumber type="currency" minIntegerDigits="1" maxFractionDigits="2" maxIntegerDigits="4" />
-					</h:inputText>
-				<h:message for="valorProduto" styleClass="erro" />
+					</prime:inputText>
+				<prime:message for="valorProduto" styleClass="erro" />
 
-				<h:outputLabel value="#{msgs.tamanho_ponto}" for="quantidade" />
-				<h:inputText value="#{listaBean.produto.quantidade}"
+				<prime:outputLabel value="#{msgs.tamanho_ponto}" for="quantidade" />
+				<prime:inputText value="#{listaBean.produto.quantidade}"
 					id="quantidade" label="tamanho" required="true" converterMessage="#{msgs.convert_cadastro_tamanho_ponto}" >
 					<f:convertNumber type="number" integerOnly="true" minIntegerDigits="1" maxIntegerDigits="2"/>
-					</h:inputText>
-				<h:message for="quantidade" styleClass="erro" />
+					</prime:inputText>
+				<prime:message for="quantidade" styleClass="erro" />
 
-				<h:outputLabel value="#{msgs.mercado_ponto}" for="mercado" />
-				<h:inputText value="#{listaBean.produto.mercado}"
+				<prime:outputLabel value="#{msgs.mercado_ponto}" for="mercado" />
+				<prime:inputText value="#{listaBean.produto.mercado}"
 					id="mercado" label="mercado" required="true"  validatorMessage="#{msgs.validator_cadastro_mercado_ponto}" >
 					<f:validateLength minimum="1" maximum="20"/>
-					</h:inputText>
-				<h:message for="mercado" styleClass="erro" />
-			</h:panelGrid>
+					</prime:inputText>
+				<prime:message for="mercado" styleClass="erro" />
+			</prime:panelGrid>
 
 			<h:commandButton value="#{msgs.add_produto_lista}"
 				action="#{listaBean.addProdutoEmDetalhe()}" >
@@ -78,50 +79,50 @@
         <h:form>
 
 
-            <h:dataTable id="idDataTableListaProdutos" value="#{listaBean.compras.listaProdutos}" var="lp"
+            <prime:dataTable id="idDataTableListaProdutos" value="#{listaBean.compras.listaProdutos}" var="lp"
                          styleClass="tabela" captionClass="tabelaCaption" 
                          headerClass="tabelaHeader" 
                          rowClasses="linhaPar, linhaImpar">
                 <f:facet name="caption">#{msgs.lista_lista_produtos}</f:facet>
-                <h:column>
+                <prime:column>
                     <f:facet name="header">pego</f:facet>
                		<h:selectBooleanCheckbox value="#{lp.pego}" />
-                </h:column>
-                <h:column>
+                </prime:column>
+                <prime:column>
                     <f:facet name="header">#{msgs.lista_nome}</f:facet>
-                    <h:outputText value="#{lp.id}-#{lp.nome}"/>
-                </h:column>
-                <h:column>
+                    <prime:outputLabel value="#{lp.id}-#{lp.nome}"/>
+                </prime:column>
+                <prime:column>
                     <f:facet name="header">#{msgs.lista_marca}</f:facet>
-                    <h:outputText value="#{lp.marca}"/>
-                </h:column>
-                <h:column>
+                    <prime:outputLabel value="#{lp.marca}"/>
+                </prime:column>
+                <prime:column>
                     <f:facet name="header">#{msgs.lista_quantidade}</f:facet>
-                    <h:outputText value="#{lp.quantidade}"/>
-                </h:column>
-                <h:column>
+                    <prime:outputLabel value="#{lp.quantidade}"/>
+                </prime:column>
+                <prime:column>
                     <f:facet name="header">#{msgs.lista_descricao}</f:facet>
-                    <h:outputText value="#{lp.descricao}"/>
-                </h:column>
-                <h:column>
+                    <prime:outputLabel value="#{lp.descricao}"/>
+                </prime:column>
+                <prime:column>
                     <f:facet name="header">#{msgs.lista_valor}</f:facet>
-                    <h:outputText value="#{lp.valorProduto}"/>
-                </h:column>
-                <h:column>
+                    <prime:outputLabel value="#{lp.valorProduto}"/>
+                </prime:column>
+                <prime:column>
                     <f:facet name="header">#{msgs.lista_data}</f:facet>
-                    <h:outputText value="#{lp.dataProduto}"/>
-                </h:column>
-                <h:column>
+                    <prime:outputLabel value="#{lp.dataProduto}"/>
+                </prime:column>
+                <prime:column>
                     <f:facet name="header">#{msgs.lista_mercado}</f:facet>
-                    <h:outputText value="#{lp.mercado}"/>
-                </h:column>
-                <h:column>
+                    <prime:outputLabel value="#{lp.mercado}"/>
+                </prime:column>
+                <prime:column>
                 	<h:commandButton value="#{msgs.ex_lista_excluir}" action="#{listaBean.excluirProdutoEmDetalhe(listaBean.compras.listaProdutos.indexOf(lp))}">
                 					<f:ajax render="@form"></f:ajax>
                 	</h:commandButton>
-               	</h:column>
+               	</prime:column>
                
-            </h:dataTable>
+            </prime:dataTable>
 
        </h:form>
     </ui:define>

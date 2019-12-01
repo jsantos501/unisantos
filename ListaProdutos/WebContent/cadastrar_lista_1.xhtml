@@ -1,24 +1,26 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	template="./_template.xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+	template="./_template.xhtml" 
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:prime="http://primefaces.org/ui">
 
 	<ui:define name="content">
 		<h:form id="form">
-			<h:panelGrid columns="3">
+			<prime:panelGrid columns="3">
 
-				<h:outputLabel value="#{msgs.nome_lista_compras}" for="nomeCompras" />
-				<h:inputText value="#{listaBean.compras.nomeListaCompras}"
+				<prime:outputLabel value="#{msgs.nome_lista_compras}" for="nomeCompras" />
+				<prime:inputText value="#{listaBean.compras.nomeListaCompras}"
 					id="nomeCompras" label="nomeCompras" required="true" 
 					validatorMessage="#{msgs.nome_lista_compras_validator}"
 					requiredMessage="#{msgs.nome_lista_compras_erro}" >
 					<f:validateLength minimum="1" maximum="20"/>
-					</h:inputText>
-				<h:message for="nomeCompras" styleClass="erro" />
+					</prime:inputText>
+				<prime:message for="nomeCompras" styleClass="erro" />
 
-			</h:panelGrid>
+			</prime:panelGrid>
 			<h:commandButton value="#{msgs.criar_lista}"
 				action="#{listaBean.addLista()}" />
 		</h:form>
