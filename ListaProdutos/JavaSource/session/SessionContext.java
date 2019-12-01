@@ -25,19 +25,19 @@ public class SessionContext {
 
 	private ExternalContext currentExternalContext() throws RuntimeException {
 		FacesContext context = FacesContext.getCurrentInstance();
-		if (context == null) throw new RuntimeException("O FacesContext não pode ser chamado fora de uma requisição HTTP");
+		if (context == null) throw new RuntimeException("O FacesContext nao pode ser chamado fora de uma requisicao HTTP");
 		else return context.getExternalContext();
 	}
 
 	public Object getAttribute(String nome) throws RuntimeException {
 		HttpSession session = (HttpSession) currentExternalContext().getSession(false);
-		if (session == null) throw new RuntimeException("Não foi possível recuperar a sessão!");
+		if (session == null) throw new RuntimeException("Nao foi possivel recuperar a sessao!");
 		return session.getAttribute(nome);
 	}
 
 	public void setAttribute(String nome, Object valor) throws RuntimeException {
 		HttpSession session = (HttpSession) currentExternalContext().getSession(false);
-		if (session == null) throw new RuntimeException("Não foi possível recuperar a sessão!");
+		if (session == null) throw new RuntimeException("Nao foi possivel recuperar a sessao!");
 		session.setAttribute(nome, valor);
 	}
 

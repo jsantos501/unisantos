@@ -17,4 +17,6 @@ public class Constantes {
 
 	public final static String USUARIO_USUARIO_POR_LOGIN_E_SENHA = "Usuario.usuarioPorLoginESenha";
 	public final static String LISTA_COMPRAS_LISTA_COMPRAS_POR_USUARIO = "ListaCompras.ListaComprasPorUsuario";
+	public final static String USUARIO_LISTAR_TODOS_USUARIOS = "Usuario.ListarTodosUsuarios";
+
 }

@@ -16,7 +16,10 @@ import constantes.Constantes;
 @Dependent
 @NamedQueries({
 	 @NamedQuery(name=Constantes.USUARIO_USUARIO_POR_LOGIN_E_SENHA, 
-			 query="SELECT u FROM Usuario u WHERE u.login=:pLogin AND u.senha=:pSenha")
+			 query="SELECT u FROM Usuario u WHERE u.login=:pLogin AND u.senha=:pSenha"),
+	 @NamedQuery(name=Constantes.USUARIO_LISTAR_TODOS_USUARIOS, 
+	 		query="SELECT u FROM Usuario u")
+
 	})
 public class Usuario implements Serializable {
 	/**

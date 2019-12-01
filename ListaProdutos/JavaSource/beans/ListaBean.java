@@ -8,13 +8,10 @@ import java.util.Calendar;
 import java.util.List;
 
 import javax.enterprise.context.SessionScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 import constantes.Constantes;
 import dao.ListaDAO;
-import dao.ProdutoDAO;
 import model.ListaCompras;
 import model.Produto;
 import model.Usuario;
@@ -24,21 +21,13 @@ import session.SessionContext;
 @SessionScoped
 public class ListaBean  implements Serializable {
 	
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	
-	
-	
 	private ListaCompras compras;
 	private Produto produto;
 	
     public String pag_detalhe_lista(ListaCompras listaCompras) throws SQLException {
     	setCompras(listaCompras);
     	setProduto(new Produto());
-    	//ProdutoDAO produtoDAO = new ProdutoDAO();
-    	//produtoDAO.listar(listaCompras);
     	
     	SessionContext.getInstance().setAttribute(Constantes.KEY_SESSION_COMPRAS_SELECIONADA, listaCompras);
     	return "/lista_compras";
@@ -59,9 +48,7 @@ public class ListaBean  implements Serializable {
     	
      	ListaDAO listaDAO = new ListaDAO();
     	Usuario user = (Usuario) SessionContext.getInstance().getAttribute(Constantes.KEY_SESSION_USUARIO_LOGADO);
-//    	compras.setIdUser(user.getId());
      	listaDAO.alterarLista(compras);
-     	
      	
        List<ListaCompras> listasCompras = listaDAO.listar(user);
     	SessionContext.getInstance().setAttribute(Constantes.KEY_SESSION_LISTAS_COMPRAS, listasCompras);
@@ -69,34 +56,28 @@ public class ListaBean  implements Serializable {
 
     }
     
-    
     public String pag_excluir_1(ListaCompras listaCompras) {
     	setCompras(listaCompras);
     	SessionContext.getInstance().setAttribute(Constantes.KEY_SESSION_COMPRAS_SELECIONADA, listaCompras);
     	return "/excluir_lista_1";
     }
     
-    public String excluirProduto(Produto produtoSel) throws SQLException {
+    public String excluirProduto(int index) throws SQLException {
     	ListaDAO listaDAO = new ListaDAO();
-    	ProdutoDAO produtoDAO = new  ProdutoDAO();
-    	
-    	//listaDAO.excluirProduto(produtoSel);
-    	produtoDAO.listar(compras);
+    	compras.getListaProdutos().remove(index);
+    	listaDAO.excluirProduto(compras);
+    	compras = listaDAO.consultar(compras.getId());
     	return "/excluir_lista_1";
 	}    
 
     public String excluirProdutoEmDetalhe(int index) throws SQLException {
     	ListaDAO listaDAO = new ListaDAO();
     	compras.getListaProdutos().remove(index);
-    	//ProdutoDAO produtoDAO = new  ProdutoDAO();
     	listaDAO.excluirProduto(compras);
     	compras = listaDAO.consultar(compras.getId());
-    	//produtoDAO.listar(compras);
-
     	return "/lista_compras";
 	}    
 
-    
     public String excluirCompra() throws SQLException{
      	ListaDAO listaDAO = new ListaDAO();
      	listaDAO.excluirLista(compras);
@@ -106,8 +87,6 @@ public class ListaBean  implements Serializable {
      	SessionContext.getInstance().setAttribute(Constantes.KEY_SESSION_LISTAS_COMPRAS, listasCompras);
          return "/home";
     }
-    
-    
     
     public String addLista() throws SQLException{
     	ListaDAO listaDAO = new ListaDAO();
@@ -141,19 +120,13 @@ public class ListaBean  implements Serializable {
     
     public String addProdutoEmDetalhe() throws SQLException{
     	ListaDAO listaDAO = new ListaDAO();
-    	
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
     	produto.setDataProduto(sdf.format(Calendar.getInstance().getTime()));
     	produto.setPego("0");
-
     	compras.getListaProdutos().add(produto);
     	listaDAO.addProdutoNaLista(compras);
-    	
     	compras = listaDAO.consultar(compras.getId());
-    	
     	produto = new Produto();
-    	
     	return "/lista_compras";
     }
     
@@ -165,20 +138,15 @@ public class ListaBean  implements Serializable {
 
     public String efetivar_cadastro_lista(ListaCompras listaCompras) {
     	SessionContext.getInstance().addMessage(Constantes.MESSAGE_FORM_SUCCESS, "cadastro da lista de compras realizado com sucesso.");
-    	
     	return "/home";
     }
-
 
     public String pag_home() {
-    	
     	return "/home";
     }
-
 
     public String efetivar_alteracao_lista(ListaCompras listaCompras) {
     	SessionContext.getInstance().addMessage(Constantes.MESSAGE_FORM_SUCCESS, "alteração da lista de compras realizada com sucesso.");
-    	
     	return "/home";
     }
 
@@ -198,16 +166,12 @@ public class ListaBean  implements Serializable {
 		this.compras = compras;
 	}
 
-
 	public Produto getProduto() {
 		return produto;
 	}
 
-
 	public void setProduto(Produto produto) {
 		this.produto = produto;
 	}
-	
-    
 }
 

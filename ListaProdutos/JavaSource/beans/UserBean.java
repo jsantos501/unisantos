@@ -29,11 +29,6 @@ import session.SessionContext;
 @Named(value = "userBean")
 @SessionScoped
 public class UserBean implements Serializable {
-
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 6015483335568647664L;
 
 	private List<ListaCompras> listasCompras;
